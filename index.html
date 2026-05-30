@@ -1,0 +1,3257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎓 English Grammar Adventure - A1-A2 ESL Platform</title>
+<style>
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #f59e0b;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+  --radius: 12px;
+  --radius-lg: 16px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --text: #f1f5f9;
+  --text-light: #94a3b8;
+  --border: #334155;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: var(--transition);
+  font-size: 16px;
+}
+
+[data-fontsize="small"] body { font-size: 14px; }
+[data-fontsize="large"] body { font-size: 18px; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+.app-container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  color: white;
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-lg);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.app-logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.app-logo span { font-size: 1.8rem; }
+
+.header-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+.btn-icon {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+
+.xp-badge {
+  background: var(--secondary);
+  color: #000;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.streak-badge {
+  background: #ef4444;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Navigation */
+.nav-bar {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 72px;
+  z-index: 99;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  gap: 4px;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.nav-btn:hover { color: var(--primary); background: rgba(99,102,241,0.05); }
+.nav-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: rgba(99,102,241,0.08); }
+
+/* Main Content */
+.tab-content { display: none; padding: 24px 0; animation: fadeIn 0.4s ease; }
+.tab-content.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.card:hover { box-shadow: var(--shadow-lg); }
+
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.card-title { font-size: 1.3rem; font-weight: 700; color: var(--text); }
+
+/* Grid */
+.grid { display: grid; gap: 20px; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+/* Buttons */
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:active { transform: scale(0.96); }
+
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); }
+
+.btn-success { background: var(--success); color: white; }
+.btn-success:hover { background: #059669; }
+
+.btn-danger { background: var(--danger); color: white; }
+.btn-danger:hover { background: #dc2626; }
+
+.btn-warning { background: var(--warning); color: #000; }
+.btn-secondary { background: var(--text-light); color: white; }
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+.btn-outline:hover { background: var(--primary); color: white; }
+
+.btn-sm { padding: 8px 16px; font-size: 0.85rem; }
+.btn-lg { padding: 16px 32px; font-size: 1.1rem; }
+
+.btn-block { width: 100%; }
+
+/* Progress */
+.progress-container { background: var(--border); border-radius: 20px; height: 12px; overflow: hidden; margin: 8px 0; }
+.progress-bar { height: 100%; border-radius: 20px; transition: width 0.5s ease; background: linear-gradient(90deg, var(--primary), #8b5cf6); }
+.progress-bar.green { background: linear-gradient(90deg, #10b981, #059669); }
+.progress-bar.orange { background: linear-gradient(90deg, #f59e0b, #d97706); }
+.progress-bar.red { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+/* Stats */
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.stat-value { font-size: 2rem; font-weight: 800; color: var(--primary); }
+.stat-label { color: var(--text-light); font-size: 0.9rem; margin-top: 4px; }
+
+/* Forms */
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  background: var(--bg);
+  color: var(--text);
+  transition: var(--transition);
+}
+
+.input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
+
+.label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+
+/* Quiz */
+.quiz-option {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quiz-option:hover { border-color: var(--primary); background: rgba(99,102,241,0.05); }
+.quiz-option.selected { border-color: var(--primary); background: rgba(99,102,241,0.1); }
+.quiz-option.correct { border-color: var(--success); background: rgba(16,185,129,0.1); }
+.quiz-option.incorrect { border-color: var(--danger); background: rgba(239,68,68,0.1); }
+
+.quiz-option input { display: none; }
+
+/* Feedback */
+.feedback {
+  padding: 16px;
+  border-radius: var(--radius);
+  margin: 12px 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feedback.success { background: rgba(16,185,129,0.1); color: var(--success); border: 1px solid var(--success); }
+.feedback.error { background: rgba(239,68,68,0.1); color: var(--danger); border: 1px solid var(--danger); }
+.feedback.info { background: rgba(59,130,246,0.1); color: var(--info); border: 1px solid var(--info); }
+
+/* Flashcard */
+.flashcard {
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.flashcard:hover { transform: scale(1.02); }
+.flashcard.flipped { background: linear-gradient(135deg, #8b5cf6, var(--primary)); }
+.flashcard-word { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+.flashcard-hint { font-size: 0.9rem; opacity: 0.8; }
+
+/* Tags */
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(99,102,241,0.1);
+  color: var(--primary);
+  margin: 2px;
+}
+
+.tag.green { background: rgba(16,185,129,0.1); color: var(--success); }
+.tag.orange { background: rgba(245,158,11,0.1); color: var(--warning); }
+.tag.red { background: rgba(239,68,68,0.1); color: var(--danger); }
+
+/* Timeline */
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.timeline-item { position: relative; margin-bottom: 24px; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  background: var(--primary);
+  border-radius: 50%;
+  border: 3px solid var(--bg-card);
+}
+
+/* Achievements */
+.achievement {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: var(--transition);
+}
+
+.achievement:hover { transform: translateX(4px); }
+.achievement.locked { opacity: 0.5; }
+.achievement-icon { font-size: 2.5rem; }
+.achievement-info h4 { margin-bottom: 4px; }
+.achievement-info p { color: var(--text-light); font-size: 0.85rem; }
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
+  animation: confetti-fall 3s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Certificate */
+.certificate {
+  background: linear-gradient(135deg, #f8fafc, #e0e7ff);
+  border: 4px solid var(--primary);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  text-align: center;
+  position: relative;
+}
+
+.certificate::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 2px solid var(--secondary);
+  border-radius: var(--radius);
+  pointer-events: none;
+}
+
+.certificate h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 8px; }
+.certificate h2 { font-size: 1.5rem; color: var(--text); margin: 16px 0; }
+.certificate p { color: var(--text-light); margin: 8px 0; }
+.certificate .seal { font-size: 4rem; margin: 20px 0; }
+
+/* Recording */
+.recorder {
+  background: var(--bg);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+}
+
+.recorder-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--danger);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 16px;
+}
+
+.recorder-btn:hover { transform: scale(1.1); }
+.recorder-btn.recording { animation: pulse 1s infinite; background: #dc2626; }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+  50% { box-shadow: 0 0 0 20px rgba(239,68,68,0); }
+}
+
+.recorder-timer { font-size: 2rem; font-weight: 800; font-family: monospace; }
+
+/* Sentence Builder */
+.sentence-word {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--primary);
+  color: white;
+  border-radius: var(--radius);
+  margin: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  user-select: none;
+}
+
+.sentence-word:hover { transform: scale(1.05); }
+.sentence-word.selected { opacity: 0.3; }
+
+.sentence-dropzone {
+  min-height: 60px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin: 12px 0;
+  background: var(--bg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Reading */
+.reading-passage {
+  background: var(--bg);
+  border-left: 4px solid var(--primary);
+  padding: 20px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 16px 0;
+  line-height: 1.8;
+}
+
+.reading-passage .highlight { background: rgba(245,158,11,0.2); padding: 2px 4px; border-radius: 4px; }
+
+/* Vocabulary */
+.vocab-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  transition: var(--transition);
+}
+
+.vocab-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.vocab-word { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+.vocab-phonetic { color: var(--text-light); font-size: 0.9rem; }
+.vocab-meaning { margin: 8px 0; }
+.vocab-example { background: var(--bg); padding: 12px; border-radius: var(--radius); font-style: italic; margin-top: 8px; }
+
+/* Memory Game */
+.memory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 500px; margin: 0 auto; }
+.memory-card {
+  background: var(--primary);
+  color: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memory-card:hover { transform: scale(1.05); }
+.memory-card.flipped { background: var(--bg-card); color: var(--text); border: 2px solid var(--primary); }
+.memory-card.matched { background: var(--success); color: white; cursor: default; }
+
+/* Word Search */
+.wordsearch-grid { display: inline-grid; gap: 2px; user-select: none; }
+.wordsearch-cell {
+  width: 36px;
+  height: 36px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.wordsearch-cell.selected { background: var(--primary); color: white; }
+.wordsearch-cell.found { background: var(--success); color: white; }
+
+/* Teacher */
+.teacher-panel { background: var(--bg); border: 2px solid var(--warning); border-radius: var(--radius-lg); padding: 24px; }
+.answer-reveal { background: #fef3c7; border: 1px solid #f59e0b; border-radius: var(--radius); padding: 12px; margin: 8px 0; }
+[data-theme="dark"] .answer-reveal { background: rgba(245,158,11,0.15); border-color: var(--warning); color: #fde68a; }
+
+/* Print */
+@media print {
+  .app-header, .nav-bar, .btn, .header-controls { display: none !important; }
+  .tab-content { display: block !important; page-break-inside: avoid; }
+  .card { box-shadow: none; border: 1px solid #ccc; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-inner { flex-direction: column; align-items: stretch; }
+  .header-controls { justify-content: space-between; }
+  .nav-inner { gap: 0; }
+  .nav-btn { padding: 10px 12px; font-size: 0.75rem; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .card { padding: 16px; }
+  .certificate { padding: 24px; }
+  .certificate h1 { font-size: 1.8rem; }
+  .memory-grid { grid-template-columns: repeat(3, 1fr); }
+  .wordsearch-cell { width: 28px; height: 28px; font-size: 0.85rem; }
+}
+
+/* Animations */
+@keyframes slideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+
+.slide-in { animation: slideIn 0.5s ease; }
+.bounce { animation: bounce 0.5s ease; }
+.shake { animation: shake 0.5s ease; }
+
+/* Tooltip */
+.tooltip { position: relative; }
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--bg);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+}
+.tooltip:hover::after { opacity: 1; }
+
+/* Comparison Table */
+.comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+.comparison-table th, .comparison-table td { padding: 12px 16px; border: 1px solid var(--border); text-align: left; }
+.comparison-table th { background: var(--primary); color: white; font-weight: 700; }
+.comparison-table tr:nth-child(even) { background: var(--bg); }
+.comparison-table tr:hover { background: rgba(99,102,241,0.05); }
+
+/* Mission */
+.mission {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+}
+.mission.completed { background: rgba(16,185,129,0.1); border-color: var(--success); }
+.mission-reward { background: var(--secondary); color: #000; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; }
+
+/* Accordion */
+.accordion { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 12px 0; }
+.accordion-header {
+  background: var(--bg);
+  padding: 16px;
+  cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+}
+.accordion-header:hover { background: rgba(99,102,241,0.05); }
+.accordion-content { padding: 16px; display: none; border-top: 1px solid var(--border); }
+.accordion.open .accordion-content { display: block; }
+.accordion-arrow { transition: transform 0.3s; }
+.accordion.open .accordion-arrow { transform: rotate(180deg); }
+
+/* Leaderboard */
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.leaderboard-item:last-child { border-bottom: none; }
+.leaderboard-rank { font-size: 1.2rem; font-weight: 800; width: 40px; text-align: center; }
+.leaderboard-name { flex: 1; font-weight: 600; }
+.leaderboard-score { font-weight: 700; color: var(--primary); }
+
+/* Loading */
+.loading { display: flex; justify-content: center; padding: 40px; }
+.spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.mt-2 { margin-top: 16px; }
+.mb-2 { margin-bottom: 16px; }
+.gap-2 { gap: 16px; }
+.flex { display: flex; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.w-full { width: 100%; }
+
+/* Pronunciation Accuracy */
+.accuracy-meter { height: 30px; background: var(--border); border-radius: 15px; overflow: hidden; margin: 12px 0; }
+.accuracy-fill { height: 100%; border-radius: 15px; transition: width 0.5s ease; }
+.accuracy-high { background: var(--success); }
+.accuracy-medium { background: var(--warning); }
+.accuracy-low { background: var(--danger); }
+
+/* Color coding for grammar */
+.tense-box { border-left: 4px solid var(--primary); padding-left: 16px; margin: 12px 0; }
+.tense-box.positive { border-color: var(--success); }
+.tense-box.negative { border-color: var(--danger); }
+.tense-box.question { border-color: var(--info); }
+
+.example-sentence { background: var(--bg); padding: 12px; border-radius: var(--radius); margin: 8px 0; }
+.example-sentence .turkish { color: var(--text-light); font-size: 0.9rem; margin-top: 4px; }
+
+.signal-word { display: inline-block; background: rgba(245,158,11,0.15); color: var(--warning); padding: 4px 12px; border-radius: 20px; margin: 4px; font-weight: 600; }
+
+/* Roadmap */
+.roadmap { display: flex; flex-wrap: wrap; gap: 8px; }
+.roadmap-step {
+  padding: 8px 16px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.roadmap-step.completed { background: var(--success); color: white; border-color: var(--success); }
+.roadmap-step.current { border-color: var(--primary); color: var(--primary); animation: bounce 2s infinite; }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="app-logo">
+        <span>🎓</span> English Grammar Adventure
+      </div>
+      <div class="header-controls">
+        <div class="xp-badge">⭐ <span id="xpDisplay">0</span> XP</div>
+        <div class="streak-badge">🔥 <span id="streakDisplay">0</span> Day Streak</div>
+        <button class="btn-icon tooltip" data-tooltip="Toggle Theme" onclick="toggleTheme()">🌙</button>
+        <button class="btn-icon tooltip" data-tooltip="Font Size" onclick="toggleFontSize()">🔤</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <div class="nav-inner" id="navInner">
+      <button class="nav-btn active" data-tab="dashboard">🏠 Dashboard</button>
+      <button class="nav-btn" data-tab="placement">📝 Placement</button>
+      <button class="nav-btn" data-tab="grammar">📚 Grammar</button>
+      <button class="nav-btn" data-tab="sentence">✍️ Sentence</button>
+      <button class="nav-btn" data-tab="readingA1">📖 A1 Reading</button>
+      <button class="nav-btn" data-tab="readingA2">📖 A2 Reading</button>
+      <button class="nav-btn" data-tab="vocabulary">🧠 Vocabulary</button>
+      <button class="nav-btn" data-tab="speaking">🎤 Speaking</button>
+      <button class="nav-btn" data-tab="pronunciation">🗣 Pronunciation</button>
+      <button class="nav-btn" data-tab="achievements">🏆 Achievements</button>
+      <button class="nav-btn" data-tab="certificate">📜 Certificate</button>
+      <button class="nav-btn" data-tab="teacher">⚙️ Teacher</button>
+    </div>
+  </nav>
+
+  <!-- Dashboard Tab -->
+  <section id="dashboard" class="tab-content active">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">👋 Welcome, <span id="studentNameDisplay">Student</span>!</h2>
+        <span class="tag" id="levelTag">Level A1</span>
+      </div>
+      <p class="text-center" style="font-size:1.2rem; margin:16px 0;" id="motivationMsg">🌟 Start your English adventure today! Every step counts!</p>
+      
+      <div class="grid grid-4">
+        <div class="stat-card">
+          <div class="stat-value" id="totalXP">0</div>
+          <div class="stat-label">Total XP</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="currentLevel">A1</div>
+          <div class="stat-label">Current Level</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="completionPct">0%</div>
+          <div class="stat-label">Completion</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="achievementsCount">0</div>
+          <div class="stat-label">Achievements</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 class="card-title">📊 Progress Overview</h3>
+        <div style="margin:16px 0;">
+          <div class="flex justify-between"><span>Grammar</span><span id="grammarPct">0%</span></div>
+          <div class="progress-container"><div class="progress-bar" id="grammarBar" style="width:0%"></div></div>
+        </div>
+        <div style="margin:16px 0;">
+          <div class="flex justify-between"><span>Reading</span><span id="readingPct">0%</span></div>
+          <div class="progress-container"><div class="progress-bar green" id="readingBar" style="width:0%"></div></div>
+        </div>
+        <div style="margin:16px 0;">
+          <div class="flex justify-between"><span>Vocabulary</span><span id="vocabPct">0%</span></div>
+          <div class="progress-container"><div class="progress-bar orange" id="vocabBar" style="width:0%"></div></div>
+        </div>
+        <div style="margin:16px 0;">
+          <div class="flex justify-between"><span>Speaking</span><span id="speakingPct">0%</span></div>
+          <div class="progress-container"><div class="progress-bar red" id="speakingBar" style="width:0%"></div></div>
+        </div>
+        <div style="margin:16px 0;">
+          <div class="flex justify-between"><span>Pronunciation</span><span id="pronPct">0%</span></div>
+          <div class="progress-container"><div class="progress-bar" id="pronBar" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">📅 Daily Missions</h3>
+        <div id="dailyMissions"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">🗺️ Learning Roadmap</h3>
+      <div class="roadmap" id="roadmap"></div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 class="card-title">🏅 Recent Achievements</h3>
+        <div id="recentAchievements"><p style="color:var(--text-light)">Complete activities to earn achievements!</p></div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">📈 Weekly Activity</h3>
+        <canvas id="weeklyChart" width="400" height="200" style="width:100%;max-height:200px;"></canvas>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3 class="card-title">✏️ Student Profile</h3>
+      <div class="grid grid-2">
+        <div>
+          <label class="label">Your Name</label>
+          <input type="text" class="input" id="studentName" placeholder="Enter your name..." onchange="saveStudentName()">
+        </div>
+        <div>
+          <label class="label">Placement Level</label>
+          <select class="input" id="placementSelect" onchange="savePlacement()">
+            <option value="A1">A1 - Beginner</option>
+            <option value="StrongA1">Strong A1</option>
+            <option value="A2">A2 - Elementary</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Placement Test Tab -->
+  <section id="placement" class="tab-content">
+    <div class="card">
+      <h2 class="card-title text-center">📝 English Placement Test</h2>
+      <p class="text-center" style="color:var(--text-light); margin:12px 0;">Answer 30 questions to find your perfect level. Take your time!</p>
+      <div id="placementTest"></div>
+      <div class="text-center mt-2">
+        <button class="btn btn-primary btn-lg" id="placementSubmitBtn" onclick="submitPlacementTest()" style="display:none;">Submit Test</button>
+      </div>
+      <div id="placementResult" style="display:none;" class="mt-2"></div>
+    </div>
+  </section>
+
+  <!-- Grammar Academy Tab -->
+  <section id="grammar" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">📚 Grammar Academy</h2>
+      <p style="color:var(--text-light);">Master English tenses step by step. Each section includes explanations, examples, and quizzes.</p>
+    </div>
+
+    <!-- Tense Sections -->
+    <div id="grammarTenses"></div>
+
+    <!-- Tense Comparison -->
+    <div class="card">
+      <h3 class="card-title">⚖️ Master Tense Comparison</h3>
+      <div id="tenseComparison"></div>
+    </div>
+  </section>
+
+  <!-- Sentence Builder Tab -->
+  <section id="sentence" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">✍️ Sentence Builder</h2>
+      <p style="color:var(--text-light);">Practice building correct English sentences. Three exercise types, 90+ questions!</p>
+      
+      <div class="flex gap-2 mb-2 flex-wrap">
+        <button class="btn btn-primary btn-sm" onclick="loadSentenceExercise(1)">🔤 Unscramble</button>
+        <button class="btn btn-success btn-sm" onclick="loadSentenceExercise(2)">🏗️ Build Sentence</button>
+        <button class="btn btn-warning btn-sm" onclick="loadSentenceExercise(3)">⏱️ Choose Tense</button>
+      </div>
+    </div>
+    <div id="sentenceExercise"></div>
+  </section>
+
+  <!-- A1 Reading Tab -->
+  <section id="readingA1" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">📖 A1 Reading World</h2>
+      <p style="color:var(--text-light);">Read short stories and answer questions. Improve your reading skills!</p>
+    </div>
+    <div id="a1Readings"></div>
+  </section>
+
+  <!-- A2 Reading Tab -->
+  <section id="readingA2" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">📖 A2 Reading World</h2>
+      <p style="color:var(--text-light);">Challenge yourself with longer texts and more complex questions!</p>
+    </div>
+    <div id="a2Readings"></div>
+  </section>
+
+  <!-- Vocabulary Lab Tab -->
+  <section id="vocabulary" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">🧠 Vocabulary Lab</h2>
+      <p style="color:var(--text-light);">Learn new words from all reading passages. Play games and test yourself!</p>
+      
+      <div class="flex gap-2 mb-2 flex-wrap">
+        <button class="btn btn-primary btn-sm" onclick="showVocabSection('list')">📋 Word List</button>
+        <button class="btn btn-success btn-sm" onclick="showVocabSection('flashcards')">🃏 Flashcards</button>
+        <button class="btn btn-warning btn-sm" onclick="showVocabSection('matching')">🔗 Matching</button>
+        <button class="btn btn-secondary btn-sm" onclick="showVocabSection('memory')">🧩 Memory Game</button>
+        <button class="btn btn-danger btn-sm" onclick="showVocabSection('quiz')">❓ Quiz</button>
+        <button class="btn btn-sm" style="background:#8b5cf6;color:white;" onclick="showVocabSection('wordsearch')">🔍 Word Search</button>
+      </div>
+    </div>
+    <div id="vocabSection"></div>
+  </section>
+
+  <!-- Speaking Studio Tab -->
+  <section id="speaking" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">🎤 Speaking Studio</h2>
+      <p style="color:var(--text-light);">Practice speaking for each tense. Record yourself and listen back!</p>
+      
+      <div class="flex gap-2 mb-2 flex-wrap">
+        <button class="btn btn-sm" style="background:#6366f1;color:white;" onclick="loadSpeaking('present-simple')">Present Simple</button>
+        <button class="btn btn-sm" style="background:#10b981;color:white;" onclick="loadSpeaking('present-continuous')">Present Continuous</button>
+        <button class="btn btn-sm" style="background:#f59e0b;color:black;" onclick="loadSpeaking('past-simple')">Past Simple</button>
+        <button class="btn btn-sm" style="background:#3b82f6;color:white;" onclick="loadSpeaking('will')">Will (Future)</button>
+        <button class="btn btn-sm" style="background:#8b5cf6;color:white;" onclick="loadSpeaking('going-to')">Going To</button>
+      </div>
+    </div>
+    <div id="speakingSection"></div>
+  </section>
+
+  <!-- Pronunciation Lab Tab -->
+  <section id="pronunciation" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">🗣️ Pronunciation Lab</h2>
+      <p style="color:var(--text-light);">Speak sentences aloud. The system checks your pronunciation!</p>
+      
+      <div class="flex gap-2 mb-2 flex-wrap">
+        <button class="btn btn-success btn-sm" onclick="loadPronunciation('beginner')">🌱 Beginner</button>
+        <button class="btn btn-warning btn-sm" onclick="loadPronunciation('intermediate')">🌿 Intermediate</button>
+        <button class="btn btn-danger btn-sm" onclick="loadPronunciation('advanced')">🌳 Advanced</button>
+      </div>
+    </div>
+    <div id="pronunciationSection"></div>
+    <div class="card">
+      <h3 class="card-title">🏅 Pronunciation Leaderboard</h3>
+      <div id="pronLeaderboard"></div>
+    </div>
+  </section>
+
+  <!-- Achievements Tab -->
+  <section id="achievements" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">🏆 Achievement Center</h2>
+      <p style="color:var(--text-light);">Complete challenges to unlock badges and rewards!</p>
+    </div>
+    <div class="grid grid-2" id="achievementsGrid"></div>
+  </section>
+
+  <!-- Certificate Tab -->
+  <section id="certificate" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">📜 Certificate Center</h2>
+      <p style="color:var(--text-light);">Generate your personalized certificate of completion!</p>
+      <button class="btn btn-primary btn-lg" onclick="generateCertificate()">🎓 Generate Certificate</button>
+    </div>
+    <div id="certificateArea" style="display:none;" class="mt-2"></div>
+  </section>
+
+  <!-- Teacher Mode Tab -->
+  <section id="teacher" class="tab-content">
+    <div class="card">
+      <h2 class="card-title">⚙️ Teacher Mode</h2>
+      <p style="color:var(--text-light);">Password protected area for teachers.</p>
+      <div id="teacherLogin">
+        <label class="label">Enter Password</label>
+        <input type="password" class="input" id="teacherPassword" placeholder="Password..." style="max-width:300px;">
+        <button class="btn btn-primary mt-2" onclick="loginTeacher()">🔓 Login</button>
+      </div>
+      <div id="teacherPanel" style="display:none;"></div>
+    </div>
+  </section>
+</div>
+
+<!-- Confetti Container -->
+<div class="confetti" id="confettiContainer"></div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script>
+// ==================== DATA & STATE ====================
+const STATE = {
+  studentName: 'Student',
+  xp: 0,
+  level: 'A1',
+  streak: 0,
+  lastActive: null,
+  grammarProgress: {},
+  readingProgress: {},
+  vocabProgress: {},
+  speakingProgress: {},
+  pronProgress: {},
+  achievements: [],
+  placementScore: 0,
+  dailyMissions: [],
+  weeklyActivity: [0,0,0,0,0,0,0],
+  settings: { theme: 'light', fontSize: 'normal' },
+  recordings: [],
+  missionsCompleted: 0
+};
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem('egad_state');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      Object.assign(STATE, parsed);
+    }
+  } catch(e) { console.log('Fresh start'); }
+  updateStreak();
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('egad_state', JSON.stringify(STATE));
+  } catch(e) { console.log('Storage full'); }
+}
+
+function updateStreak() {
+  const today = new Date().toDateString();
+  if (STATE.lastActive) {
+    const last = new Date(STATE.lastActive);
+    const diff = Math.floor((new Date(today) - last) / (1000*60*60*24));
+    if (diff === 1) {
+      STATE.streak++;
+    } else if (diff > 1) {
+      STATE.streak = 1;
+    }
+  } else {
+    STATE.streak = 1;
+  }
+  STATE.lastActive = today;
+  saveState();
+}
+
+function addXP(amount) {
+  STATE.xp += amount;
+  checkAchievements();
+  updateDashboard();
+  saveState();
+}
+
+// ==================== NAVIGATION ====================
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    
+    if (btn.dataset.tab === 'dashboard') updateDashboard();
+    if (btn.dataset.tab === 'placement') buildPlacementTest();
+    if (btn.dataset.tab === 'grammar') buildGrammar();
+    if (btn.dataset.tab === 'sentence') loadSentenceExercise(1);
+    if (btn.dataset.tab === 'readingA1') buildA1Readings();
+    if (btn.dataset.tab === 'readingA2') buildA2Readings();
+    if (btn.dataset.tab === 'vocabulary') showVocabSection('list');
+    if (btn.dataset.tab === 'achievements') buildAchievements();
+    if (btn.dataset.tab === 'pronunciation') loadPronunciation('beginner');
+  });
+});
+
+// ==================== THEME & SETTINGS ====================
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  STATE.settings.theme = isDark ? 'light' : 'dark';
+  saveState();
+}
+
+function toggleFontSize() {
+  const sizes = ['small', 'normal', 'large'];
+  let current = STATE.settings.fontSize || 'normal';
+  let idx = sizes.indexOf(current);
+  idx = (idx + 1) % sizes.length;
+  current = sizes[idx];
+  STATE.settings.fontSize = current;
+  document.documentElement.setAttribute('data-fontsize', current === 'normal' ? '' : current);
+  saveState();
+}
+
+function saveStudentName() {
+  STATE.studentName = document.getElementById('studentName').value || 'Student';
+  document.getElementById('studentNameDisplay').textContent = STATE.studentName;
+  saveState();
+}
+
+function savePlacement() {
+  STATE.level = document.getElementById('placementSelect').value;
+  saveState();
+}
+
+// ==================== DASHBOARD ====================
+function updateDashboard() {
+  document.getElementById('xpDisplay').textContent = STATE.xp;
+  document.getElementById('streakDisplay').textContent = STATE.streak;
+  document.getElementById('totalXP').textContent = STATE.xp;
+  document.getElementById('currentLevel').textContent = STATE.level;
+  document.getElementById('studentNameDisplay').textContent = STATE.studentName;
+  document.getElementById('studentName').value = STATE.studentName;
+  document.getElementById('placementSelect').value = STATE.level;
+  document.getElementById('levelTag').textContent = 'Level ' + STATE.level;
+  document.getElementById('achievementsCount').textContent = STATE.achievements.length;
+
+  const grammarTotal = 5;
+  const grammarDone = Object.keys(STATE.grammarProgress).length;
+  const grammarPct = Math.round((grammarDone / grammarTotal) * 100);
+  
+  const readingTotal = 6;
+  const readingDone = Object.keys(STATE.readingProgress).length;
+  const readingPct = Math.round((readingDone / readingTotal) * 100);
+  
+  const vocabTotal = 50;
+  const vocabDone = Object.keys(STATE.vocabProgress).length;
+  const vocabPct = Math.min(100, Math.round((vocabDone / vocabTotal) * 100));
+  
+  const speakingDone = Object.keys(STATE.speakingProgress).length;
+  const speakingPct = Math.min(100, Math.round((speakingDone / 75) * 100));
+  
+  const pronDone = Object.keys(STATE.pronProgress).length;
+  const pronPct = Math.min(100, Math.round((pronDone / 50) * 100));
+
+  document.getElementById('grammarPct').textContent = grammarPct + '%';
+  document.getElementById('grammarBar').style.width = grammarPct + '%';
+  document.getElementById('readingPct').textContent = readingPct + '%';
+  document.getElementById('readingBar').style.width = readingPct + '%';
+  document.getElementById('vocabPct').textContent = vocabPct + '%';
+  document.getElementById('vocabBar').style.width = vocabPct + '%';
+  document.getElementById('speakingPct').textContent = speakingPct + '%';
+  document.getElementById('speakingBar').style.width = speakingPct + '%';
+  document.getElementById('pronPct').textContent = pronPct + '%';
+  document.getElementById('pronBar').style.width = pronPct + '%';
+
+  const overall = Math.round((grammarPct + readingPct + vocabPct + speakingPct + pronPct) / 5);
+  document.getElementById('completionPct').textContent = overall + '%';
+
+  const messages = [
+    "🌟 Start your English adventure today! Every step counts!",
+    "🚀 You're doing amazing! Keep up the great work!",
+    "💪 Practice makes perfect! You're getting better every day!",
+    "🎯 Focus on one section at a time. You've got this!",
+    "🌈 English opens doors to the world. Keep learning!",
+    "🏆 Champions never quit! Keep pushing forward!",
+    "📚 Knowledge is power. You're building yours every day!"
+  ];
+  document.getElementById('motivationMsg').textContent = messages[Math.floor(Math.random() * messages.length)];
+
+  buildRoadmap(grammarDone, readingDone, vocabDone);
+  buildDailyMissions();
+  drawWeeklyChart();
+}
+
+function buildRoadmap(grammar, reading, vocab) {
+  const steps = [
+    { name: 'Present Simple', done: STATE.grammarProgress['present-simple'] },
+    { name: 'Present Continuous', done: STATE.grammarProgress['present-continuous'] },
+    { name: 'Past Simple', done: STATE.grammarProgress['past-simple'] },
+    { name: 'Future: Will', done: STATE.grammarProgress['will'] },
+    { name: 'Future: Going To', done: STATE.grammarProgress['going-to'] },
+    { name: 'A1 Readings', done: reading >= 3 },
+    { name: 'A2 Readings', done: reading >= 6 },
+    { name: 'Vocabulary (50)', done: vocab >= 50 },
+    { name: 'Speaking (75)', done: Object.keys(STATE.speakingProgress).length >= 75 },
+    { name: 'Pronunciation (50)', done: Object.keys(STATE.pronProgress).length >= 50 }
+  ];
+  
+  const html = steps.map((s, i) => {
+    const cls = s.done ? 'completed' : (i === steps.findIndex(x => !x.done) ? 'current' : '');
+    return `<div class="roadmap-step ${cls}">${s.done ? '✅' : '⬜'} ${s.name}</div>`;
+  }).join('');
+  
+  document.getElementById('roadmap').innerHTML = html;
+}
+
+function buildDailyMissions() {
+  const missions = [
+    { id: 'm1', name: 'Complete 1 Grammar Quiz', xp: 50, done: STATE.missionsCompleted > 0 },
+    { id: 'm2', name: 'Answer 5 Reading Questions', xp: 30, done: Object.keys(STATE.readingProgress).length >= 5 },
+    { id: 'm3', name: 'Learn 10 New Words', xp: 40, done: Object.keys(STATE.vocabProgress).length >= 10 },
+    { id: 'm4', name: 'Record 3 Speaking Answers', xp: 60, done: STATE.recordings.length >= 3 }
+  ];
+  
+  document.getElementById('dailyMissions').innerHTML = missions.map(m => `
+    <div class="mission ${m.done ? 'completed' : ''}">
+      <div>
+        <strong>${m.done ? '✅' : '🎯'} ${m.name}</strong>
+      </div>
+      <div class="mission-reward">+${m.xp} XP</div>
+    </div>
+  `).join('');
+}
+
+function drawWeeklyChart() {
+  const canvas = document.getElementById('weeklyChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+  
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const data = STATE.weeklyActivity;
+  const max = Math.max(...data, 100);
+  const barW = (w - 60) / 7;
+  
+  ctx.font = '12px sans-serif';
+  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text') || '#333';
+  
+  days.forEach((day, i) => {
+    const barH = (data[i] / max) * (h - 40);
+    const x = 30 + i * barW + barW * 0.2;
+    const y = h - 30 - barH;
+    
+    const grad = ctx.createLinearGradient(0, y, 0, h - 30);
+    grad.addColorStop(0, '#6366f1');
+    grad.addColorStop(1, '#8b5cf6');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x, y, barW * 0.6, barH);
+    
+    ctx.fillStyle = ctx.fillStyle || '#333';
+    ctx.fillText(day, x + barW * 0.1, h - 10);
+    ctx.fillText(data[i], x + barW * 0.1, y - 5);
+  });
+}
+
+// ==================== PLACEMENT TEST ====================
+const placementQuestions = [
+  { q: "She ___ to school every day.", options: ["go", "goes", "going", "gone"], correct: 1 },
+  { q: "I ___ TV right now.", options: ["watch", "watches", "am watching", "watched"], correct: 2 },
+  { q: "They ___ football yesterday.", options: ["play", "played", "playing", "plays"], correct: 1 },
+  { q: "We ___ visit our grandparents next week.", options: ["will", "are", "do", "have"], correct: 0 },
+  { q: "He ___ study medicine next year.", options: ["will", "is going to", "is", "does"], correct: 1 },
+  { q: "My mother ___ in a hospital.", options: ["work", "works", "working", "worked"], correct: 1 },
+  { q: "Look! The cat ___ on the sofa.", options: ["sleeps", "sleep", "is sleeping", "slept"], correct: 2 },
+  { q: "I ___ a new bike last month.", options: ["buy", "bought", "buying", "buys"], correct: 1 },
+  { q: "___ you help me with this?", options: ["Do", "Will", "Are", "Have"], correct: 1 },
+  { q: "She ___ her homework before dinner.", options: ["will finish", "is finishing", "finishes", "finished"], correct: 3 },
+  { q: "We ___ breakfast at 7 AM every morning.", options: ["have", "has", "having", "had"], correct: 0 },
+  { q: "The children ___ in the garden now.", options: ["play", "plays", "are playing", "played"], correct: 2 },
+  { q: "My father ___ to London last summer.", options: ["travel", "travels", "traveled", "is traveling"], correct: 2 },
+  { q: "I think it ___ rain tomorrow.", options: ["is going to", "will", "is", "does"], correct: 1 },
+  { q: "She ___ a doctor. She has already decided.", options: ["will be", "is going to be", "is", "was"], correct: 1 },
+  { q: "What time ___ you usually wake up?", options: ["do", "does", "are", "did"], correct: 0 },
+  { q: "Listen! Someone ___ the piano.", options: ["plays", "play", "is playing", "played"], correct: 2 },
+  { q: "I ___ my keys yesterday. I couldn't find them.", options: ["lose", "lost", "losing", "loses"], correct: 1 },
+  { q: "I promise I ___ call you tonight.", options: ["will", "am going to", "am", "do"], correct: 0 },
+  { q: "We ___ a party this weekend. We bought the decorations.", options: ["will have", "are going to have", "have", "had"], correct: 1 },
+  { q: "The sun ___ in the east.", options: ["rise", "rises", "is rising", "rose"], correct: 1 },
+  { q: "She ___ a letter to her friend at the moment.", options: ["writes", "write", "is writing", "wrote"], correct: 2 },
+  { q: "They ___ married in 2020.", options: ["get", "got", "getting", "gets"], correct: 1 },
+  { q: "___ you come to my birthday party?", options: ["Do", "Will", "Are", "Did"], correct: 1 },
+  { q: "I ___ my dentist appointment at 3 PM tomorrow.", options: ["will have", "am having", "have", "had"], correct: 1 },
+  { q: "Water ___ at 100 degrees Celsius.", options: ["boil", "boils", "is boiling", "boiled"], correct: 1 },
+  { q: "The students ___ quietly right now.", options: ["study", "studies", "are studying", "studied"], correct: 2 },
+  { q: "He ___ his phone last week.", options: ["break", "breaks", "broke", "is breaking"], correct: 2 },
+  { q: "I ___ be 15 next month.", options: ["will", "am going to", "am", "do"], correct: 0 },
+  { q: "They ___ move to a new house. They already signed the contract.", options: ["will", "are going to", "are", "do"], correct: 1 }
+];
+
+let placementAnswers = {};
+let placementSubmitted = false;
+
+function buildPlacementTest() {
+  if (placementSubmitted) return;
+  const container = document.getElementById('placementTest');
+  container.innerHTML = placementQuestions.map((q, i) => `
+    <div class="card" style="margin-bottom:12px;">
+      <p><strong>Question ${i+1}:</strong> ${q.q}</p>
+      <div style="margin-top:8px;">
+        ${q.options.map((opt, j) => `
+          <label class="quiz-option" onclick="selectPlacement(${i}, ${j})">
+            <input type="radio" name="placement${i}" value="${j}">
+            <span>${opt}</span>
+          </label>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('placementSubmitBtn').style.display = 'inline-flex';
+}
+
+function selectPlacement(qIdx, optIdx) {
+  placementAnswers[qIdx] = optIdx;
+  const options = document.querySelectorAll(`[name="placement${qIdx}"]`);
+  options.forEach((opt, i) => {
+    opt.parentElement.classList.toggle('selected', i === optIdx);
+  });
+  
+  if (Object.keys(placementAnswers).length === placementQuestions.length) {
+    document.getElementById('placementSubmitBtn').classList.add('bounce');
+  }
+}
+
+function submitPlacementTest() {
+  if (Object.keys(placementAnswers).length < placementQuestions.length) {
+    alert('Please answer all 30 questions before submitting!');
+    return;
+  }
+  
+  let score = 0;
+  placementQuestions.forEach((q, i) => {
+    if (placementAnswers[i] === q.correct) score++;
+  });
+  
+  placementSubmitted = true;
+  STATE.placementScore = score;
+  
+  let level, recommendation;
+  if (score >= 25) {
+    level = 'A2';
+    recommendation = '🌟 Excellent! You are ready for A2 level. Start with A2 readings and advanced vocabulary!';
+  } else if (score >= 18) {
+    level = 'Strong A1';
+    recommendation = '👍 Good job! You have a strong A1 level. Review A1 grammar and start A2 readings gradually.';
+  } else {
+    level = 'A1';
+    recommendation = '📚 You are at A1 level. Focus on the Grammar Academy and A1 readings to build a strong foundation!';
+  }
+  
+  STATE.level = level;
+  saveState();
+  
+  document.getElementById('placementSubmitBtn').style.display = 'none';
+  document.getElementById('placementResult').style.display = 'block';
+  document.getElementById('placementResult').innerHTML = `
+    <div class="card" style="text-align:center; border:2px solid var(--primary);">
+      <h2>📊 Your Result: ${score}/30</h2>
+      <p style="font-size:1.5rem; font-weight:800; color:var(--primary); margin:16px 0;">Level: ${level}</p>
+      <p style="font-size:1.1rem;">${recommendation}</p>
+      <div style="margin-top:16px;">
+        <button class="btn btn-primary" onclick="showTab('grammar')">📚 Start Grammar Academy</button>
+        <button class="btn btn-success" onclick="showTab('readingA1')">📖 Start A1 Readings</button>
+      </div>
+    </div>
+  `;
+  
+  addXP(100);
+  showConfetti();
+}
+
+function showTab(tabId) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+}
+
+// ==================== GRAMMAR ACADEMY ====================
+const grammarData = {
+  'present-simple': {
+    title: 'Present Simple',
+    icon: '🟢',
+    color: '#10b981',
+    explanation: 'We use Present Simple for habits, routines, facts, and general truths.',
+    turkishNote: 'Geniş Zaman: Alışkanlıklar, rutinler, genel gerçekler için kullanılır.',
+    structure: {
+      positive: 'Subject + V1 (I/You/We/They) | Subject + V1+s (He/She/It)',
+      negative: 'Subject + do not / does not + V1',
+      question: 'Do / Does + Subject + V1?',
+      wh: 'Wh-word + do/does + Subject + V1?'
+    },
+    signalWords: ['always', 'usually', 'often', 'sometimes', 'never', 'every day', 'every week', 'on Mondays'],
+    examples: [
+      { en: "I wake up at 7 o'clock every morning.", tr: "Her sabah saat 7'de uyanırım." },
+      { en: "She drinks coffee every day.", tr: "O her gün kahve içer." },
+      { en: "They play football on weekends.", tr: "Onlar hafta sonları futbol oynar." },
+      { en: "The sun rises in the east.", tr: "Güneş doğudan doğar." },
+      { en: "He doesn't like spicy food.", tr: "O acılı yemek sevmez." },
+      { en: "We don't go to school on Sundays.", tr: "Biz Pazar günleri okula gitmeyiz." },
+      { en: "Does she speak English?", tr: "O İngilizce konuşur mu?" },
+      { en: "Do you live in Istanbul?", tr: "İstanbul'da mı yaşıyorsun?" },
+      { en: "Where does your father work?", tr: "Senin baban nerede çalışır?" },
+      { en: "My mother cooks dinner every evening.", tr: "Annem her akşam yemek pişirir." }
+    ],
+    mistakes: ["He go to school. ❌ → He goes to school. ✅", "She don't like it. ❌ → She doesn't like it. ✅"],
+    quiz: [
+      { q: "She ___ to music every day.", options: ["listen", "listens", "listening", "listened"], correct: 1 },
+      { q: "___ you like pizza?", options: ["Do", "Does", "Are", "Is"], correct: 0 },
+      { q: "My father ___ in a bank.", options: ["work", "works", "working", "worked"], correct: 1 },
+      { q: "They ___ not eat meat.", options: ["do", "does", "are", "is"], correct: 0 },
+      { q: "Where ___ she live?", options: ["do", "does", "is", "are"], correct: 1 },
+      { q: "I always ___ my teeth before bed.", options: ["brush", "brushes", "brushing", "brushed"], correct: 0 },
+      { q: "The Earth ___ around the Sun.", options: ["go", "goes", "going", "went"], correct: 1 },
+      { q: "He ___ TV in the evening.", options: ["watch", "watches", "watching", "watched"], correct: 1 },
+      { q: "We ___ to the cinema every Friday.", options: ["go", "goes", "going", "went"], correct: 0 },
+      { q: "___ your brother play guitar?", options: ["Do", "Does", "Is", "Are"], correct: 1 }
+    ]
+  },
+  'present-continuous': {
+    title: 'Present Continuous',
+    icon: '🔵',
+    color: '#3b82f6',
+    explanation: 'We use Present Continuous for actions happening NOW or temporary situations.',
+    turkishNote: 'Şimdiki Zaman: Şu anda olan geçici eylemler için kullanılır.',
+    structure: {
+      positive: 'Subject + am/is/are + V-ing',
+      negative: 'Subject + am/is/are + not + V-ing',
+      question: 'Am/Is/Are + Subject + V-ing?',
+      wh: 'Wh-word + am/is/are + Subject + V-ing?'
+    },
+    signalWords: ['now', 'right now', 'at the moment', 'currently', 'today', 'look!', 'listen!'],
+    examples: [
+      { en: "I am studying English right now.", tr: "Şu anda İngilizce çalışıyorum." },
+      { en: "She is reading a book at the moment.", tr: "O şu anda bir kitap okuyor." },
+      { en: "They are playing in the garden.", tr: "Onlar bahçede oynuyor." },
+      { en: "Look! The bus is coming.", tr: "Bak! Otobüs geliyor." },
+      { en: "He is not listening to the teacher.", tr: "O öğretmeni dinlemiyor." },
+      { en: "We are not watching TV now.", tr: "Şu anda televizyon izlemiyoruz." },
+      { en: "Is she sleeping?", tr: "O uyuyor mu?" },
+      { en: "Are they coming to the party?", tr: "Onlar partiye geliyor mu?" },
+      { en: "What are you doing right now?", tr: "Şu anda ne yapıyorsun?" },
+      { en: "My sister is learning to drive.", tr: "Kız kardeşim araba kullanmayı öğreniyor." }
+    ],
+    mistakes: ["I am study now. ❌ → I am studying now. ✅", "She is read a book. ❌ → She is reading a book. ✅"],
+    quiz: [
+      { q: "I ___ my homework right now.", options: ["do", "am doing", "does", "did"], correct: 1 },
+      { q: "Look! The children ___ in the park.", options: ["play", "plays", "are playing", "played"], correct: 2 },
+      { q: "She ___ to music at the moment.", options: ["listen", "listens", "is listening", "listened"], correct: 2 },
+      { q: "___ you watching TV now?", options: ["Do", "Are", "Is", "Does"], correct: 1 },
+      { q: "He ___ not working today.", options: ["is", "are", "do", "does"], correct: 0 },
+      { q: "What ___ she cooking?", options: ["do", "does", "is", "are"], correct: 2 },
+      { q: "They ___ a new house.", options: ["build", "builds", "are building", "built"], correct: 2 },
+      { q: "Listen! The birds ___.", options: ["sing", "sings", "are singing", "sang"], correct: 2 },
+      { q: "I ___ not feeling well today.", options: ["am", "is", "are", "do"], correct: 0 },
+      { q: "We ___ for the bus right now.", options: ["wait", "waits", "are waiting", "waited"], correct: 2 }
+    ]
+  },
+  'past-simple': {
+    title: 'Past Simple',
+    icon: '🟡',
+    color: '#f59e0b',
+    explanation: 'We use Past Simple for completed actions in the past.',
+    turkishNote: 'Geçmiş Zaman: Tamamlanmış geçmiş eylemler için kullanılır.',
+    structure: {
+      positive: 'Subject + V2 (past form)',
+      negative: 'Subject + did not + V1',
+      question: 'Did + Subject + V1?',
+      wh: 'Wh-word + did + Subject + V1?'
+    },
+    signalWords: ['yesterday', 'last week', 'last month', 'last year', 'in 2020', 'ago', 'when I was young'],
+    examples: [
+      { en: "I visited my grandmother yesterday.", tr: "Dün büyükannemi ziyaret ettim." },
+      { en: "She bought a new dress last week.", tr: "O geçen hafta yeni bir elbise aldı." },
+      { en: "They traveled to Paris last summer.", tr: "Onlar geçen yaz Paris'e gitti." },
+      { en: "He finished his homework an hour ago.", tr: "O bir saat önce ödevini bitirdi." },
+      { en: "We didn't go to the cinema last night.", tr: "Dün gece sinemaya gitmedik." },
+      { en: "She didn't call me yesterday.", tr: "O beni dün aramadı." },
+      { en: "Did you see that movie?", tr: "O filmi gördün mü?" },
+      { en: "Did they win the match?", tr: "Onlar maçı kazandı mı?" },
+      { en: "Where did you go on holiday?", tr: "Tatilde nereye gittin?" },
+      { en: "My father cooked dinner yesterday evening.", tr: "Babam dün akşam yemek pişirdi." }
+    ],
+    mistakes: ["I goed to school. ❌ → I went to school. ✅", "Did she went? ❌ → Did she go? ✅"],
+    quiz: [
+      { q: "I ___ to the cinema yesterday.", options: ["go", "goes", "went", "going"], correct: 2 },
+      { q: "She ___ a beautiful song last night.", options: ["sing", "sings", "sang", "singing"], correct: 2 },
+      { q: "They ___ football last weekend.", options: ["play", "plays", "played", "playing"], correct: 2 },
+      { q: "___ you finish your homework?", options: ["Do", "Did", "Are", "Were"], correct: 1 },
+      { q: "He ___ not come to school yesterday.", options: ["do", "does", "did", "was"], correct: 2 },
+      { q: "When ___ she arrive?", options: ["do", "does", "did", "is"], correct: 2 },
+      { q: "We ___ a great time at the party.", options: ["have", "has", "had", "having"], correct: 2 },
+      { q: "My mother ___ a cake for my birthday.", options: ["make", "makes", "made", "making"], correct: 2 },
+      { q: "They ___ in London in 2019.", options: ["live", "lives", "lived", "living"], correct: 2 },
+      { q: "I ___ my keys yesterday. I couldn't find them.", options: ["lose", "loses", "lost", "losing"], correct: 2 }
+    ]
+  },
+  'will': {
+    title: 'Future with Will',
+    icon: '🟣',
+    color: '#8b5cf6',
+    explanation: 'We use "will" for predictions, promises, offers, and spontaneous decisions.',
+    turkishNote: '"Will" gelecek zaman: Tahminler, sözler, teklifler ve anlık kararlar için kullanılır.',
+    structure: {
+      positive: 'Subject + will + V1',
+      negative: 'Subject + will not (won\'t) + V1',
+      question: 'Will + Subject + V1?',
+      wh: 'Wh-word + will + Subject + V1?'
+    },
+    signalWords: ['tomorrow', 'next week', 'next year', 'in the future', 'I think', 'I promise', 'I hope', 'probably'],
+    examples: [
+      { en: "I will help you with your homework.", tr: "Ödevinde sana yardım edeceğim." },
+      { en: "She will be a doctor one day.", tr: "O bir gün doktor olacak." },
+      { en: "They will visit us next month.", tr: "Onlar gelecek ay bizi ziyaret edecek." },
+      { en: "It will rain tomorrow.", tr: "Yarın yağmur yağacak." },
+      { en: "I won't tell anyone your secret.", tr: "Sırrını kimseye söylemeyeceğim." },
+      { en: "She won't come to the party.", tr: "O partiye gelmeyecek." },
+      { en: "Will you marry me?", tr: "Benimle evlenir misin?" },
+      { en: "Will they arrive on time?", tr: "Zamanında varacaklar mı?" },
+      { en: "Where will you go on holiday?", tr: "Tatilde nereye gideceksin?" },
+      { en: "I promise I will call you tonight.", tr: "Söz veriyorum, bu gece seni arayacağım." }
+    ],
+    mistakes: ["I will going to school. ❌ → I will go to school. ✅", "Will she goes? ❌ → Will she go? ✅"],
+    quiz: [
+      { q: "I think it ___ rain tomorrow.", options: ["will", "is going to", "is", "does"], correct: 0 },
+      { q: "She ___ be 20 next year.", options: ["will", "is going to", "is", "does"], correct: 0 },
+      { q: "I promise I ___ help you.", options: ["will", "am going to", "am", "do"], correct: 0 },
+      { q: "___ you come to my party?", options: ["Do", "Will", "Are", "Did"], correct: 1 },
+      { q: "They ___ not forget your birthday.", options: ["will", "are going to", "are", "do"], correct: 0 },
+      { q: "What ___ you do after school?", options: ["do", "does", "will", "are"], correct: 2 },
+      { q: "I ___ be there at 5 o'clock.", options: ["will", "am going to", "am", "do"], correct: 0 },
+      { q: "He ___ probably win the competition.", options: ["will", "is going to", "is", "does"], correct: 0 },
+      { q: "___ she like the present?", options: ["Do", "Will", "Is", "Does"], correct: 1 },
+      { q: "We ___ never forget this day.", options: ["will", "are going to", "are", "do"], correct: 0 }
+    ]
+  },
+  'going-to': {
+    title: 'Future with Be Going To',
+    icon: '🔴',
+    color: '#ef4444',
+    explanation: 'We use "be going to" for plans, intentions, and predictions based on evidence.',
+    turkishNote: '"Be going to" gelecek zaman: Planlar, niyetler ve kanıta dayalı tahminler için kullanılır.',
+    structure: {
+      positive: 'Subject + am/is/are + going to + V1',
+      negative: 'Subject + am/is/are + not + going to + V1',
+      question: 'Am/Is/Are + Subject + going to + V1?',
+      wh: 'Wh-word + am/is/are + Subject + going to + V1?'
+    },
+    signalWords: ['tonight', 'this weekend', 'tomorrow', 'next week', 'next month', 'look at those clouds', 'I have decided'],
+    examples: [
+      { en: "I am going to study medicine.", tr: "Tıp okuyacağım." },
+      { en: "She is going to visit her aunt this weekend.", tr: "O bu hafta sonu teyzesini ziyaret edecek." },
+      { en: "They are going to buy a new car.", tr: "Onlar yeni bir araba alacaklar." },
+      { en: "Look at those clouds! It is going to rain.", tr: "Şu bulutlara bak! Yağmur yağacak." },
+      { en: "I am not going to eat fast food anymore.", tr: "Artık fast food yemeyeceğim." },
+      { en: "She is not going to watch that movie.", tr: "O o filmi izlemeyecek." },
+      { en: "Are you going to come to the concert?", tr: "Konsere gelecek misin?" },
+      { en: "Is he going to play football?", tr: "O futbol oynayacak mı?" },
+      { en: "What are you going to do tonight?", tr: "Bu akşam ne yapacaksın?" },
+      { en: "We are going to travel to Japan next year.", tr: "Gelecek yıl Japonya'ya seyahat edeceğiz." }
+    ],
+    mistakes: ["I going to study. ❌ → I am going to study. ✅", "She going to buy. ❌ → She is going to buy. ✅"],
+    quiz: [
+      { q: "I ___ study medicine at university.", options: ["will", "am going to", "am", "do"], correct: 1 },
+      { q: "She ___ visit her grandmother this weekend.", options: ["will", "is going to", "is", "does"], correct: 1 },
+      { q: "They ___ move to a new house.", options: ["will", "are going to", "are", "do"], correct: 1 },
+      { q: "___ you going to come to the party?", options: ["Do", "Are", "Will", "Did"], correct: 1 },
+      { q: "He ___ not play football today. He is sick.", options: ["will", "is going to", "is", "does"], correct: 1 },
+      { q: "What ___ you going to do tonight?", options: ["do", "does", "are", "will"], correct: 2 },
+      { q: "Look at the clouds! It ___ rain.", options: ["will", "is going to", "is", "does"], correct: 1 },
+      { q: "We ___ have a picnic tomorrow. We bought the food.", options: ["will", "are going to", "are", "do"], correct: 1 },
+      { q: "___ she going to learn French?", options: ["Do", "Is", "Will", "Does"], correct: 1 },
+      { q: "I ___ not eat sugar anymore.", options: ["will", "am going to", "am", "do"], correct: 1 }
+    ]
+  }
+};
+
+function buildGrammar() {
+  const container = document.getElementById('grammarTenses');
+  let html = '';
+  
+  Object.entries(grammarData).forEach(([key, data]) => {
+    const done = STATE.grammarProgress[key];
+    html += `
+      <div class="card" style="border-left:5px solid ${data.color};">
+        <div class="card-header">
+          <h3 class="card-title">${data.icon} ${data.title} ${done ? '✅' : ''}</h3>
+          <button class="btn btn-sm ${done ? 'btn-secondary' : 'btn-primary'}" onclick="startGrammarQuiz('${key}')">
+            ${done ? 'Review' : 'Start Quiz'}
+          </button>
+        </div>
+        
+        <div class="tense-box">
+          <p><strong>📖 Explanation:</strong> ${data.explanation}</p>
+          <p style="color:var(--text-light); margin-top:8px;"><strong>🇹🇷 Türkçe Not:</strong> ${data.turkishNote}</p>
+        </div>
+
+        <h4 style="margin:16px 0 8px;">📐 Sentence Structure</h4>
+        <div class="tense-box positive"><strong>✅ Positive:</strong> ${data.structure.positive}</div>
+        <div class="tense-box negative"><strong>❌ Negative:</strong> ${data.structure.negative}</div>
+        <div class="tense-box question"><strong>❓ Question:</strong> ${data.structure.question}</div>
+        <div class="tense-box question"><strong>🔍 Wh-Questions:</strong> ${data.structure.wh}</div>
+
+        <h4 style="margin:16px 0 8px;">📌 Signal Words</h4>
+        <div>${data.signalWords.map(w => `<span class="signal-word">${w}</span>`).join('')}</div>
+
+        <h4 style="margin:16px 0 8px;">📝 Examples</h4>
+        ${data.examples.map((ex, i) => `
+          <div class="example-sentence">
+            <strong>${i+1}.</strong> ${ex.en}
+            <div class="turkish">🇹🇷 ${ex.tr}</div>
+          </div>
+        `).join('')}
+
+        <h4 style="margin:16px 0 8px;">⚠️ Common Mistakes</h4>
+        ${data.mistakes.map(m => `<div class="example-sentence" style="background:rgba(239,68,68,0.05);">${m}</div>`).join('')}
+
+        <div id="quiz-${key}" style="display:none;"></div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+  
+  // Comparison section
+  buildTenseComparison();
+}
+
+function startGrammarQuiz(key) {
+  const data = grammarData[key];
+  const container = document.getElementById('quiz-' + key);
+  container.style.display = 'block';
+  
+  container.innerHTML = `
+    <h4 style="margin:16px 0;">🧠 Mini Quiz</h4>
+    ${data.quiz.map((q, i) => `
+      <div class="card" style="margin:8px 0;">
+        <p><strong>${i+1}.</strong> ${q.q}</p>
+        <div style="margin-top:8px;">
+          ${q.options.map((opt, j) => `
+            <label class="quiz-option" onclick="checkGrammarAnswer('${key}', ${i}, ${j})">
+              <input type="radio" name="gquiz-${key}-${i}" value="${j}">
+              <span>${opt}</span>
+            </label>
+          `).join('')}
+        </div>
+      </div>
+    `).join('')}
+    <button class="btn btn-primary" onclick="completeGrammar('${key}')">✅ Complete Section</button>
+  `;
+}
+
+function checkGrammarAnswer(key, qIdx, optIdx) {
+  const data = grammarData[key];
+  const q = data.quiz[qIdx];
+  const options = document.querySelectorAll(`[name="gquiz-${key}-${qIdx}"]`);
+  
+  options.forEach((opt, i) => {
+    opt.parentElement.classList.remove('correct', 'incorrect');
+    if (i === q.correct) opt.parentElement.classList.add('correct');
+    if (i === optIdx && i !== q.correct) opt.parentElement.classList.add('incorrect');
+  });
+}
+
+function completeGrammar(key) {
+  STATE.grammarProgress[key] = true;
+  saveState();
+  addXP(75);
+  showConfetti();
+  buildGrammar();
+}
+
+function buildTenseComparison() {
+  const container = document.getElementById('tenseComparison');
+  container.innerHTML = `
+    <h4 style="margin:16px 0;">Present Simple vs Present Continuous</h4>
+    <table class="comparison-table">
+      <tr><th></th><th>Present Simple</th><th>Present Continuous</th></tr>
+      <tr><td><strong>Usage</strong></td><td>Habits, routines, facts</td><td>Actions happening NOW, temporary</td></tr>
+      <tr><td><strong>Form</strong></td><td>V1 / V1+s</td><td>am/is/are + V-ing</td></tr>
+      <tr><td><strong>Example</strong></td><td>I play tennis every Sunday.</td><td>I am playing tennis right now.</td></tr>
+      <tr><td><strong>Signal Words</strong></td><td>always, usually, every day</td><td>now, right now, at the moment</td></tr>
+      <tr><td><strong>Turkish</strong></td><td>Her Pazar tenis oynarım.</td><td>Şu anda tenis oynuyorum.</td></tr>
+    </table>
+
+    <h4 style="margin:16px 0;">Will vs Going To</h4>
+    <table class="comparison-table">
+      <tr><th></th><th>Will</th><th>Be Going To</th></tr>
+      <tr><td><strong>Usage</strong></td><td>Predictions, promises, offers, spontaneous decisions</td><td>Plans, intentions, evidence-based predictions</td></tr>
+      <tr><td><strong>Form</strong></td><td>will + V1</td><td>am/is/are + going to + V1</td></tr>
+      <tr><td><strong>Example</strong></td><td>I'll help you! (spontaneous)</td><td>I'm going to study medicine. (plan)</td></tr>
+      <tr><td><strong>Turkish</strong></td><td>Size yardım edeceğim! (anlık karar)</td><td>Tıp okuyacağım. (plan)</td></tr>
+    </table>
+
+    <div class="card" style="background:rgba(99,102,241,0.05); border:1px solid var(--primary);">
+      <h4>🇹🇷 Türkçe Özet Karşılaştırma</h4>
+      <ul style="margin:12px 0; padding-left:20px;">
+        <li><strong>Present Simple</strong> = Geniş Zaman (yaparım, yapar, yaparız)</li>
+        <li><strong>Present Continuous</strong> = Şimdiki Zaman (yapıyorum, yapıyor, yapıyoruz)</li>
+        <li><strong>Past Simple</strong> = Geçmiş Zaman (yaptım, yaptı, yaptık)</li>
+        <li><strong>Will</strong> = Gelecek Zaman (yapacağım - tahmin/söz/teklif)</li>
+        <li><strong>Going To</strong> = Gelecek Zaman (yapacağım - plan/niyet)</li>
+      </ul>
+    </div>
+  `;
+}
+
+// ==================== SENTENCE BUILDER ====================
+const sentenceData = {
+  unscramble: [
+    { words: ["I", "go", "to", "school", "every", "day"], answer: "I go to school every day", hint: "Routine" },
+    { words: ["She", "is", "reading", "a", "book", "now"], answer: "She is reading a book now", hint: "Right now" },
+    { words: ["They", "played", "football", "yesterday"], answer: "They played football yesterday", hint: "Past" },
+    { words: ["He", "will", "visit", "his", "grandmother", "tomorrow"], answer: "He will visit his grandmother tomorrow", hint: "Future" },
+    { words: ["We", "are", "going", "to", "buy", "a", "new", "car"], answer: "We are going to buy a new car", hint: "Plan" },
+    { words: ["My", "mother", "cooks", "dinner", "every", "evening"], answer: "My mother cooks dinner every evening", hint: "Habit" },
+    { words: ["Look", "the", "bus", "is", "coming"], answer: "Look the bus is coming", hint: "Happening now" },
+    { words: ["I", "finished", "my", "homework", "an", "hour", "ago"], answer: "I finished my homework an hour ago", hint: "Past" },
+    { words: ["She", "does", "not", "like", "spicy", "food"], answer: "She does not like spicy food", hint: "Negative" },
+    { words: ["Are", "you", "watching", "TV", "right", "now"], answer: "Are you watching TV right now", hint: "Question" },
+    { words: ["The", "sun", "rises", "in", "the", "east"], answer: "The sun rises in the east", hint: "Fact" },
+    { words: ["He", "did", "not", "come", "to", "school", "yesterday"], answer: "He did not come to school yesterday", hint: "Negative past" },
+    { words: ["I", "promise", "I", "will", "call", "you", "tonight"], answer: "I promise I will call you tonight", hint: "Promise" },
+    { words: ["They", "are", "going", "to", "travel", "to", "Japan"], answer: "They are going to travel to Japan", hint: "Plan" },
+    { words: ["Does", "she", "speak", "English"], answer: "Does she speak English", hint: "Question" },
+    { words: ["We", "don't", "go", "to", "school", "on", "Sundays"], answer: "We don't go to school on Sundays", hint: "Negative routine" },
+    { words: ["The", "children", "are", "playing", "in", "the", "garden"], answer: "The children are playing in the garden", hint: "Now" },
+    { words: ["I", "bought", "a", "new", "bike", "last", "month"], answer: "I bought a new bike last month", hint: "Past" },
+    { words: ["She", "is", "going", "to", "be", "a", "doctor"], answer: "She is going to be a doctor", hint: "Intention" },
+    { words: ["Where", "do", "you", "live"], answer: "Where do you live", hint: "Wh-question" },
+    { words: ["My", "father", "works", "in", "a", "bank"], answer: "My father works in a bank", hint: "Job" },
+    { words: ["Listen", "someone", "is", "playing", "the", "piano"], answer: "Listen someone is playing the piano", hint: "Sound" },
+    { words: ["They", "got", "married", "in", "2020"], answer: "They got married in 2020", hint: "Past" },
+    { words: ["I", "think", "it", "will", "rain", "tomorrow"], answer: "I think it will rain tomorrow", hint: "Prediction" },
+    { words: ["What", "are", "you", "doing", "right", "now"], answer: "What are you doing right now", hint: "Question" },
+    { words: ["She", "always", "wakes", "up", "at", "7", "o'clock"], answer: "She always wakes up at 7 o'clock", hint: "Routine" },
+    { words: ["He", "is", "not", "listening", "to", "the", "teacher"], answer: "He is not listening to the teacher", hint: "Negative" },
+    { words: ["We", "traveled", "to", "Paris", "last", "summer"], answer: "We traveled to Paris last summer", hint: "Past" },
+    { words: ["Will", "you", "help", "me", "with", "this"], answer: "Will you help me with this", hint: "Offer" },
+    { words: ["They", "are", "going", "to", "have", "a", "party"], answer: "They are going to have a party", hint: "Plan" }
+  ],
+  build: [
+    { base: "I / go / school", task: "Make positive (Present Simple)", answer: "I go to school", tense: "present-simple" },
+    { base: "She / drink / coffee", task: "Make positive (Present Simple)", answer: "She drinks coffee", tense: "present-simple" },
+    { base: "They / play / football", task: "Make negative (Present Simple)", answer: "They don't play football", tense: "present-simple" },
+    { base: "He / work / bank", task: "Make question (Present Simple)", answer: "Does he work in a bank", tense: "present-simple" },
+    { base: "I / study / English", task: "Make positive (Present Simple)", answer: "I study English", tense: "present-simple" },
+    { base: "She / read / book", task: "Make positive (Present Continuous)", answer: "She is reading a book", tense: "present-continuous" },
+    { base: "They / play / garden", task: "Make positive (Present Continuous)", answer: "They are playing in the garden", tense: "present-continuous" },
+    { base: "He / listen / music", task: "Make negative (Present Continuous)", answer: "He is not listening to music", tense: "present-continuous" },
+    { base: "I / watch / TV", task: "Make question (Present Continuous)", answer: "Are you watching TV", tense: "present-continuous" },
+    { base: "We / wait / bus", task: "Make positive (Present Continuous)", answer: "We are waiting for the bus", tense: "present-continuous" },
+    { base: "I / visit / grandmother", task: "Make positive (Past Simple)", answer: "I visited my grandmother", tense: "past-simple" },
+    { base: "She / buy / dress", task: "Make positive (Past Simple)", answer: "She bought a dress", tense: "past-simple" },
+    { base: "They / go / cinema", task: "Make negative (Past Simple)", answer: "They didn't go to the cinema", tense: "past-simple" },
+    { base: "He / finish / homework", task: "Make question (Past Simple)", answer: "Did he finish his homework", tense: "past-simple" },
+    { base: "We / have / great", task: "Make positive (Past Simple)", answer: "We had a great time", tense: "past-simple" },
+    { base: "I / help / you", task: "Make positive (Will)", answer: "I will help you", tense: "will" },
+    { base: "She / be / doctor", task: "Make positive (Will)", answer: "She will be a doctor", tense: "will" },
+    { base: "They / come / party", task: "Make negative (Will)", answer: "They won't come to the party", tense: "will" },
+    { base: "you / marry / me", task: "Make question (Will)", answer: "Will you marry me", tense: "will" },
+    { base: "It / rain / tomorrow", task: "Make positive (Will)", answer: "It will rain tomorrow", tense: "will" },
+    { base: "I / study / medicine", task: "Make positive (Going To)", answer: "I am going to study medicine", tense: "going-to" },
+    { base: "She / visit / aunt", task: "Make positive (Going To)", answer: "She is going to visit her aunt", tense: "going-to" },
+    { base: "They / buy / car", task: "Make negative (Going To)", answer: "They are not going to buy a car", tense: "going-to" },
+    { base: "you / do / tonight", task: "Make question (Going To)", answer: "What are you going to do tonight", tense: "going-to" },
+    { base: "We / travel / Japan", task: "Make positive (Going To)", answer: "We are going to travel to Japan", tense: "going-to" },
+    { base: "My mother / cook / dinner", task: "Make positive (Present Simple)", answer: "My mother cooks dinner", tense: "present-simple" },
+    { base: "The children / sleep", task: "Make positive (Present Continuous)", answer: "The children are sleeping", tense: "present-continuous" },
+    { base: "I / lose / keys", task: "Make positive (Past Simple)", answer: "I lost my keys", tense: "past-simple" },
+    { base: "He / travel / London", task: "Make positive (Past Simple)", answer: "He traveled to London", tense: "past-simple" },
+    { base: "She / learn / drive", task: "Make positive (Present Continuous)", answer: "She is learning to drive", tense: "present-continuous" }
+  ],
+  chooseTense: [
+    { sentence: "I ___ to school every day.", options: ["go", "am going", "went", "will go"], correct: 0, tense: "Present Simple" },
+    { sentence: "Look! The bus ___.", options: ["comes", "is coming", "came", "will come"], correct: 1, tense: "Present Continuous" },
+    { sentence: "She ___ a new dress last week.", options: ["buys", "is buying", "bought", "will buy"], correct: 2, tense: "Past Simple" },
+    { sentence: "I think it ___ rain tomorrow.", options: ["is", "is going to", "will", "does"], correct: 2, tense: "Will" },
+    { sentence: "They ___ a party this weekend. They bought decorations.", options: ["will have", "are going to have", "have", "had"], correct: 1, tense: "Going To" },
+    { sentence: "The sun ___ in the east.", options: ["rise", "rises", "is rising", "rose"], correct: 1, tense: "Present Simple" },
+    { sentence: "He ___ TV right now.", options: ["watches", "is watching", "watched", "will watch"], correct: 1, tense: "Present Continuous" },
+    { sentence: "We ___ to Paris last summer.", options: ["travel", "are traveling", "traveled", "will travel"], correct: 2, tense: "Past Simple" },
+    { sentence: "I promise I ___ call you.", options: ["will", "am going to", "am", "do"], correct: 0, tense: "Will" },
+    { sentence: "She ___ study medicine. She has decided.", options: ["will", "is going to", "is", "does"], correct: 1, tense: "Going To" },
+    { sentence: "My father ___ in a hospital.", options: ["work", "works", "is working", "worked"], correct: 1, tense: "Present Simple" },
+    { sentence: "Listen! Someone ___ the piano.", options: ["plays", "is playing", "played", "will play"], correct: 1, tense: "Present Continuous" },
+    { sentence: "I ___ my homework yesterday.", options: ["finish", "am finishing", "finished", "will finish"], correct: 2, tense: "Past Simple" },
+    { sentence: "___ you help me with this?", options: ["Do", "Will", "Are", "Did"], correct: 1, tense: "Will" },
+    { sentence: "Look at those clouds! It ___ rain.", options: ["will", "is going to", "is", "does"], correct: 1, tense: "Going To" },
+    { sentence: "She always ___ up at 7 AM.", options: ["wake", "wakes", "is waking", "woke"], correct: 1, tense: "Present Simple" },
+    { sentence: "The students ___ quietly now.", options: ["study", "studies", "are studying", "studied"], correct: 2, tense: "Present Continuous" },
+    { sentence: "They ___ married in 2020.", options: ["get", "gets", "got", "will get"], correct: 2, tense: "Past Simple" },
+    { sentence: "I ___ be 15 next month.", options: ["will", "am going to", "am", "do"], correct: 0, tense: "Will" },
+    { sentence: "We ___ move to a new house. We signed the contract.", options: ["will", "are going to", "are", "do"], correct: 1, tense: "Going To" },
+    { sentence: "Water ___ at 100°C.", options: ["boil", "boils", "is boiling", "boiled"], correct: 1, tense: "Present Simple" },
+    { sentence: "She ___ a letter at the moment.", options: ["writes", "is writing", "wrote", "will write"], correct: 1, tense: "Present Continuous" },
+    { sentence: "He ___ his phone last week.", options: ["break", "breaks", "broke", "will break"], correct: 2, tense: "Past Simple" },
+    { sentence: "I think she ___ pass the exam.", options: ["will", "is going to", "is", "does"], correct: 0, tense: "Will" },
+    { sentence: "They ___ have a picnic. They bought the food.", options: ["will", "are going to", "are", "do"], correct: 1, tense: "Going To" },
+    { sentence: "I ___ coffee every morning.", options: ["drink", "am drinking", "drank", "will drink"], correct: 0, tense: "Present Simple" },
+    { sentence: "The dog ___ in the garden now.", options: ["runs", "is running", "ran", "will run"], correct: 1, tense: "Present Continuous" },
+    { sentence: "She ___ to London last year.", options: ["go", "goes", "went", "will go"], correct: 2, tense: "Past Simple" },
+    { sentence: "I ___ never forget your kindness.", options: ["will", "am going to", "am", "do"], correct: 0, tense: "Will" },
+    { sentence: "I ___ learn Spanish this year.", options: ["will", "am going to", "am", "do"], correct: 1, tense: "Going To" }
+  ]
+};
+
+let currentSentenceExercise = 1;
+let sentenceScore = 0;
+let sentenceIdx = 0;
+
+function loadSentenceExercise(type) {
+  currentSentenceExercise = type;
+  sentenceIdx = 0;
+  sentenceScore = 0;
+  
+  if (type === 1) buildUnscrambleExercise();
+  else if (type === 2) buildBuildExercise();
+  else buildChooseTenseExercise();
+}
+
+function buildUnscrambleExercise() {
+  const data = sentenceData.unscramble;
+  if (sentenceIdx >= data.length) {
+    finishSentenceExercise();
+    return;
+  }
+  
+  const q = data[sentenceIdx];
+  const shuffled = [...q.words].sort(() => Math.random() - 0.5);
+  
+  document.getElementById('sentenceExercise').innerHTML = `
+    <div class="card">
+      <div class="flex justify-between items-center">
+        <h3 class="card-title">🔤 Unscramble the Sentence (${sentenceIdx + 1}/${data.length})</h3>
+        <span class="tag">Score: ${sentenceScore}</span>
+      </div>
+      <p style="color:var(--text-light);">Hint: ${q.hint}</p>
+      <p style="font-size:1.2rem; font-weight:700; margin:16px 0;">Click words in the correct order:</p>
+      <div class="sentence-dropzone" id="dropZone"></div>
+      <div style="margin:16px 0;">
+        ${shuffled.map((w, i) => `<span class="sentence-word" id="word-${i}" onclick="pickWord(${i}, '${w}')">${w}</span>`).join('')}
+      </div>
+      <div class="flex gap-2">
+        <button class="btn btn-primary" onclick="checkUnscramble()">✅ Check</button>
+        <button class="btn btn-secondary" onclick="resetUnscramble()">🔄 Reset</button>
+        <button class="btn btn-warning" onclick="showHint('${q.answer}')">💡 Hint</button>
+      </div>
+      <div id="sentenceFeedback"></div>
+    </div>
+  `;
+  
+  window._selectedWords = [];
+  window._shuffledWords = shuffled;
+}
+
+function pickWord(idx, word) {
+  const el = document.getElementById('word-' + idx);
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    window._selectedWords = window._selectedWords.filter(w => w !== word + '-' + idx);
+  } else {
+    el.classList.add('selected');
+    window._selectedWords.push(word);
+  }
+  
+  const dropZone = document.getElementById('dropZone');
+  dropZone.innerHTML = window._selectedWords.map(w => `<span class="sentence-word">${w}</span>`).join('');
+}
+
+function resetUnscramble() {
+  window._selectedWords = [];
+  document.querySelectorAll('.sentence-word').forEach(el => el.classList.remove('selected'));
+  document.getElementById('dropZone').innerHTML = '';
+  document.getElementById('sentenceFeedback').innerHTML = '';
+}
+
+function checkUnscramble() {
+  const data = sentenceData.unscramble;
+  const q = data[sentenceIdx];
+  const userAnswer = window._selectedWords.join(' ');
+  
+  if (userAnswer === q.answer) {
+    document.getElementById('sentenceFeedback').innerHTML = '<div class="feedback success">✅ Correct! Great job!</div>';
+    sentenceScore += 10;
+    addXP(10);
+    setTimeout(() => { sentenceIdx++; buildUnscrambleExercise(); }, 1500);
+  } else {
+    document.getElementById('sentenceFeedback').innerHTML = `<div class="feedback error">❌ Not quite. The correct answer is: "${q.answer}"</div>`;
+  }
+}
+
+function showHint(answer) {
+  document.getElementById('sentenceFeedback').innerHTML = `<div class="feedback info">💡 Hint: The sentence starts with "${answer.split(' ')[0]}" and has ${answer.split(' ').length} words.</div>`;
+}
+
+function buildBuildExercise() {
+  const data = sentenceData.build;
+  if (sentenceIdx >= data.length) {
+    finishSentenceExercise();
+    return;
+  }
+  
+  const q = data[sentenceIdx];
+  
+  document.getElementById('sentenceExercise').innerHTML = `
+    <div class="card">
+      <div class="flex justify-between items-center">
+        <h3 class="card-title">🏗️ Build the Sentence (${sentenceIdx + 1}/${data.length})</h3>
+        <span class="tag">Score: ${sentenceScore}</span>
+      </div>
+      <p><strong>Task:</strong> ${q.task}</p>
+      <p><strong>Words:</strong> ${q.base}</p>
+      <label class="label" style="margin-top:16px;">Type your sentence:</label>
+      <input type="text" class="input" id="buildInput" placeholder="Type the sentence here...">
+      <div class="flex gap-2 mt-2">
+        <button class="btn btn-primary" onclick="checkBuild()">✅ Check</button>
+        <button class="btn btn-secondary" onclick="showBuildAnswer()">👁️ Show Answer</button>
+      </div>
+      <div id="buildFeedback"></div>
+    </div>
+  `;
+}
+
+function checkBuild() {
+  const data = sentenceData.build;
+  const q = data[sentenceIdx];
+  const userAnswer = document.getElementById('buildInput').value.trim().toLowerCase().replace(/[?.!,]/g, '');
+  const correctAnswer = q.answer.toLowerCase().replace(/[?.!,]/g, '');
+  
+  if (userAnswer === correctAnswer) {
+    document.getElementById('buildFeedback').innerHTML = '<div class="feedback success">✅ Perfect! Well done!</div>';
+    sentenceScore += 10;
+    addXP(10);
+    setTimeout(() => { sentenceIdx++; buildBuildExercise(); }, 1500);
+  } else {
+    document.getElementById('buildFeedback').innerHTML = `<div class="feedback error">❌ Not correct. Try again or check the answer.</div>`;
+  }
+}
+
+function showBuildAnswer() {
+  const data = sentenceData.build;
+  document.getElementById('buildFeedback').innerHTML = `<div class="feedback info">✅ Answer: ${data[sentenceIdx].answer}</div>`;
+}
+
+function buildChooseTenseExercise() {
+  const data = sentenceData.chooseTense;
+  if (sentenceIdx >= data.length) {
+    finishSentenceExercise();
+    return;
+  }
+  
+  const q = data[sentenceIdx];
+  
+  document.getElementById('sentenceExercise').innerHTML = `
+    <div class="card">
+      <div class="flex justify-between items-center">
+        <h3 class="card-title">⏱️ Choose the Correct Tense (${sentenceIdx + 1}/${data.length})</h3>
+        <span class="tag">Score: ${sentenceScore}</span>
+      </div>
+      <p style="font-size:1.2rem; font-weight:700; margin:16px 0;">${q.sentence}</p>
+      ${q.options.map((opt, i) => `
+        <label class="quiz-option" onclick="checkTense(${i})">
+          <input type="radio" name="tense${sentenceIdx}" value="${i}">
+          <span>${opt}</span>
+        </label>
+      `).join('')}
+      <div id="tenseFeedback"></div>
+    </div>
+  `;
+}
+
+function checkTense(idx) {
+  const data = sentenceData.chooseTense;
+  const q = data[sentenceIdx];
+  const options = document.querySelectorAll(`[name="tense${sentenceIdx}"]`);
+  
+  options.forEach((opt, i) => {
+    opt.parentElement.classList.remove('correct', 'incorrect');
+    if (i === q.correct) opt.parentElement.classList.add('correct');
+    if (i === idx && i !== q.correct) opt.parentElement.classList.add('incorrect');
+  });
+  
+  if (idx === q.correct) {
+    document.getElementById('tenseFeedback').innerHTML = `<div class="feedback success">✅ Correct! This is ${q.tense}.</div>`;
+    sentenceScore += 10;
+    addXP(10);
+    setTimeout(() => { sentenceIdx++; buildChooseTenseExercise(); }, 1500);
+  } else {
+    document.getElementById('tenseFeedback').innerHTML = `<div class="feedback error">❌ The correct answer is "${q.options[q.correct]}" (${q.tense}).</div>`;
+  }
+}
+
+function finishSentenceExercise() {
+  document.getElementById('sentenceExercise').innerHTML = `
+    <div class="card text-center">
+      <h2>🎉 Exercise Complete!</h2>
+      <p style="font-size:1.5rem; font-weight:800; color:var(--primary); margin:16px 0;">Score: ${sentenceScore} points</p>
+      <div class="flex gap-2 justify-center flex-wrap">
+        <button class="btn btn-primary" onclick="loadSentenceExercise(${currentSentenceExercise})">🔄 Try Again</button>
+        <button class="btn btn-success" onclick="loadSentenceExercise(${currentSentenceExercise === 3 ? 1 : currentSentenceExercise + 1})">➡️ Next Exercise</button>
+      </div>
+    </div>
+  `;
+  showConfetti();
+}
+
+// ==================== READING ====================
+const readingsA1 = [
+  {
+    id: 'a1-routine',
+    title: 'My Daily Routine',
+    topic: 'Daily Routine',
+    text: `My name is Ayşe and I am fourteen years old. I live in Ankara with my family. Every morning, I wake up at six thirty. First, I brush my teeth and wash my face. Then I get dressed and go downstairs for breakfast. My mother usually makes eggs and toast for breakfast. I drink a glass of milk every morning because it is good for my health.\n\nI go to school at eight o'clock. My school is not far from my house, so I walk. I have classes from eight to three. My favourite subject is English because I like learning new languages. I also enjoy maths and science.\n\nAfter school, I go home and have lunch. Then I do my homework. In the evening, I watch TV or read a book. I usually go to bed at nine thirty. On weekends, I play with my friends and visit my grandparents.`,
+    questions: [
+      { type: 'mc', q: 'What time does Ayşe wake up?', options: ['6:00', '6:30', '7:00', '8:00'], correct: 1 },
+      { type: 'mc', q: 'What does she drink for breakfast?', options: ['Juice', 'Tea', 'Milk', 'Coffee'], correct: 2 },
+      { type: 'mc', q: 'How does she go to school?', options: ['By bus', 'By car', 'She walks', 'By bike'], correct: 2 },
+      { type: 'tf', q: 'Ayşe\'s favourite subject is maths.', correct: false },
+      { type: 'tf', q: 'She goes to bed at 9:30.', correct: true },
+      { type: 'sa', q: 'Where does Ayşe live?', answer: 'Ankara' }
+    ]
+  },
+  {
+    id: 'a1-family',
+    title: 'My Family and Friends',
+    topic: 'Family and Friends',
+    text: `I come from a big family. There are five people in my family: my father, my mother, my older brother, my younger sister, and me. My father is a teacher. He works at a high school. He is very kind and patient. My mother is a nurse. She works at a hospital near our house.\n\nMy brother is seventeen years old. He is in his last year of high school. He loves football and plays every weekend. My sister is only six. She is very funny and makes everyone laugh.\n\nI have two best friends. Their names are Elif and Can. We go to the same school. We often study together and help each other with homework. On Saturdays, we go to the park or play video games. We have known each other since primary school. I love my family and my friends very much.`,
+    questions: [
+      { type: 'mc', q: 'How many people are in the family?', options: ['3', '4', '5', '6'], correct: 2 },
+      { type: 'mc', q: 'What does the father do?', options: ['Doctor', 'Teacher', 'Nurse', 'Engineer'], correct: 1 },
+      { type: 'mc', q: 'How old is the sister?', options: ['4', '5', '6', '7'], correct: 2 },
+      { type: 'tf', q: 'The brother plays football every weekend.', correct: true },
+      { type: 'tf', q: 'Elif and Can are from different schools.', correct: false },
+      { type: 'sa', q: 'When do they go to the park?', answer: 'Saturdays' }
+    ]
+  },
+  {
+    id: 'a1-weekend',
+    title: 'Weekend Activities',
+    topic: 'Weekend Activities',
+    text: `Every Saturday, my family does something special together. We don't work on Saturdays because it is our family day.\n\nIn the morning, we have a big breakfast. My father makes pancakes and my mother prepares fresh fruit salad. After breakfast, we clean the house together. Everyone has a job to do. I clean my room and help my sister with her toys.\n\nIn the afternoon, we go out. Sometimes we visit the park and have a picnic. Sometimes we go to the cinema to watch a film. My favourite cinema is the one near the shopping mall because it has big comfortable seats.\n\nOn Sundays, we usually visit our grandparents. They live in a small house with a beautiful garden. My grandmother always cooks delicious food. My grandfather tells us interesting stories about the past. I love weekends because I spend time with the people I love most.`,
+    questions: [
+      { type: 'mc', q: 'What day is the family day?', options: ['Friday', 'Saturday', 'Sunday', 'Monday'], correct: 1 },
+      { type: 'mc', q: 'Who makes pancakes?', options: ['Mother', 'Father', 'Grandmother', 'Ayşe'], correct: 1 },
+      { type: 'mc', q: 'Where is the favourite cinema?', options: ['City centre', 'Near school', 'Near shopping mall', 'Near park'], correct: 2 },
+      { type: 'tf', q: 'They visit grandparents on Saturdays.', correct: false },
+      { type: 'tf', q: 'The grandmother cooks delicious food.', correct: true },
+      { type: 'sa', q: 'What does the grandfather do?', answer: 'Tells stories' }
+    ]
+  }
+];
+
+const readingsA2 = [
+  {
+    id: 'a2-travel',
+    title: 'My First Trip Abroad',
+    topic: 'Travel Experience',
+    text: `Last summer, I had the most amazing experience of my life. My family and I went to Italy for our holiday. It was my first time traveling abroad, and I was both excited and a little nervous.\n\nWe flew from Istanbul to Rome. The flight took about two hours and forty minutes. When we arrived, the weather was hot and sunny. Everything looked different from Turkey – the buildings, the streets, the food, and even the language. But the Italian people were very friendly and welcoming.\n\nWe stayed in Rome for four days. Every morning, we visited famous places like the Colosseum, the Vatican, and the Trevi Fountain. I took hundreds of photos! I also tried real Italian pizza and pasta, and they were absolutely delicious.\n\nAfter Rome, we traveled to Florence by train. The journey was beautiful – we saw mountains, rivers, and small villages through the window. In Florence, I visited art museums and saw paintings by famous artists. I learned a lot about history and culture.\n\nThis trip changed my perspective on the world. I realized that traveling is not just about visiting new places; it is about understanding different cultures and meeting new people. I hope to travel more in the future.`,
+    questions: [
+      { type: 'mc', q: 'Where did the family travel?', options: ['Spain', 'France', 'Italy', 'Greece'], correct: 2 },
+      { type: 'mc', q: 'How long was the flight?', options: ['1 hour', '2 hours 40 min', '3 hours', '4 hours'], correct: 1 },
+      { type: 'mc', q: 'How many days did they stay in Rome?', options: ['2', '3', '4', '5'], correct: 2 },
+      { type: 'matching', pairs: [['Colosseum', 'Rome'], ['Trevi Fountain', 'Rome'], ['Art museums', 'Florence']] },
+      { type: 'gap', sentence: 'The trip changed the writer\'s _____ on the world.', answer: 'perspective' },
+      { type: 'tf', q: 'They traveled from Rome to Florence by bus.', correct: false }
+    ]
+  },
+  {
+    id: 'a2-school',
+    title: 'A Day at My School',
+    topic: 'School Life',
+    text: `My school is called Atatürk Middle School, and I have been studying here for three years. It is located in the centre of Izmir, and it is one of the oldest schools in the city.\n\nOur school day starts at eight thirty in the morning. We have four lessons before the lunch break at twelve o'clock. The lunch break lasts for one hour, and during this time, I usually eat in the school cafeteria with my friends. The food is not bad, but I sometimes bring a sandwich from home.\n\nAfter lunch, we have three more lessons. My favourite lesson is English because our teacher, Mr. Yılmaz, makes learning fun. He uses games, videos, and group activities to teach us. I also enjoy science class because we do interesting experiments in the laboratory.\n\nEvery Wednesday afternoon, we have club activities. I am a member of the drama club. We practice plays and perform in front of the school twice a year. It helps me become more confident when speaking in public.\n\nSchool finishes at three thirty, but I usually stay until four to study in the library. I think my school is a great place to learn and grow. The teachers care about us, and I have made many good friends here.`,
+    questions: [
+      { type: 'mc', q: 'Where is the school located?', options: ['Ankara', 'Istanbul', 'Izmir', 'Antalya'], correct: 2 },
+      { type: 'mc', q: 'What time does school start?', options: ['7:30', '8:00', '8:30', '9:00'], correct: 2 },
+      { type: 'mc', q: 'How long is the lunch break?', options: ['30 min', '45 min', '1 hour', '1.5 hours'], correct: 2 },
+      { type: 'matching', pairs: [['English teacher', 'Mr. Yılmaz'], ['Club', 'Drama'], ['School', 'Atatürk Middle School']] },
+      { type: 'gap', sentence: 'The writer stays until four to study in the _____.', answer: 'library' },
+      { type: 'tf', q: 'The writer is in the music club.', correct: false }
+    ]
+  },
+  {
+    id: 'a2-future',
+    title: 'My Future Plans',
+    topic: 'Future Plans',
+    text: `When I think about the future, I feel both excited and a little scared. I am currently in the ninth grade, which means I have three more years before university. However, I have already started thinking about what I want to do after school.\n\nI am going to study medicine at university. I have always been interested in science and helping people. My dream is to become a doctor and work in a hospital. I know it will be very difficult, but I am ready to work hard. I am studying extra hours and taking additional science courses to prepare.\n\nI also want to learn other languages. I am already learning English, and I am going to start learning Spanish next year. I think knowing multiple languages will help me communicate with people from different countries.\n\nIn the future, I would like to travel to different countries and maybe work abroad for a while. I want to experience different cultures and learn from other people. I am going to save money for my travels by working part-time during the summer holidays.\n\nMy parents support my plans, and they always encourage me to follow my dreams. My teacher says that with hard work and determination, I can achieve anything. I believe in myself, and I am going to make my dreams come true.`,
+    questions: [
+      { type: 'mc', q: 'What grade is the writer in?', options: ['7th', '8th', '9th', '10th'], correct: 2 },
+      { type: 'mc', q: 'What does the writer want to study?', options: ['Law', 'Engineering', 'Medicine', 'Art'], correct: 2 },
+      { type: 'mc', q: 'Which language will they start next?', options: ['French', 'German', 'Spanish', 'Japanese'], correct: 2 },
+      { type: 'matching', pairs: [['Current language', 'English'], ['Future language', 'Spanish'], ['Career', 'Doctor']] },
+      { type: 'gap', sentence: 'The writer will save money by working _____ during summer.', answer: 'part-time' },
+      { type: 'tf', q: 'The writer\'s parents do not support their plans.', correct: false }
+    ]
+  }
+];
+
+let readingScores = {};
+
+function buildA1Readings() {
+  const container = document.getElementById('a1Readings');
+  container.innerHTML = readingsA1.map((r, ri) => `
+    <div class="card">
+      <h3 class="card-title">📖 ${r.title} (${r.topic})</h3>
+      <button class="btn btn-sm btn-outline mb-2" onclick="readAloud('${r.id}')">🔊 Read Aloud</button>
+      <div class="reading-passage">${r.text.replace(/\n/g, '<br>')}</div>
+      
+      <h4 style="margin:16px 0 8px;">📝 Questions</h4>
+      <div id="quiz-${r.id}">
+        ${r.questions.map((q, qi) => {
+          if (q.type === 'mc') {
+            return `
+              <div class="card" style="margin:8px 0;">
+                <p><strong>${qi+1}.</strong> ${q.q}</p>
+                ${q.options.map((opt, oi) => `
+                  <label class="quiz-option" onclick="checkReading('${r.id}', ${qi}, ${oi})">
+                    <input type="radio" name="read-${r.id}-${qi}" value="${oi}">
+                    <span>${opt}</span>
+                  </label>
+                `).join('')}
+              </div>
+            `;
+          } else if (q.type === 'tf') {
+            return `
+              <div class="card" style="margin:8px 0;">
+                <p><strong>${qi+1}.</strong> ${q.q}</p>
+                <div class="flex gap-2">
+                  <button class="btn btn-success btn-sm" onclick="checkTF('${r.id}', ${qi}, true)">True</button>
+                  <button class="btn btn-danger btn-sm" onclick="checkTF('${r.id}', ${qi}, false)">False</button>
+                </div>
+              </div>
+            `;
+          } else {
+            return `
+              <div class="card" style="margin:8px 0;">
+                <p><strong>${qi+1}.</strong> ${q.q}</p>
+                <input type="text" class="input" id="sa-${r.id}-${qi}" placeholder="Type your answer...">
+                <button class="btn btn-primary btn-sm mt-2" onclick="checkSA('${r.id}', ${qi})">Check</button>
+              </div>
+            `;
+          }
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function readAloud(id) {
+  const allReadings = [...readingsA1, ...readingsA2];
+  const reading = allReadings.find(r => r.id === id);
+  if (!reading) return;
+  
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(reading.text);
+    utter.lang = 'en-US';
+    utter.rate = 0.9;
+    window.speechSynthesis.speak(utter);
+  }
+}
+
+function checkReading(id, qi, oi) {
+  const reading = [...readingsA1, ...readingsA2].find(r => r.id === id);
+  const q = reading.questions[qi];
+  const options = document.querySelectorAll(`[name="read-${id}-${qi}"]`);
+  
+  options.forEach((opt, i) => {
+    opt.parentElement.classList.remove('correct', 'incorrect');
+    if (i === q.correct) opt.parentElement.classList.add('correct');
+    if (i === oi && i !== q.correct) opt.parentElement.classList.add('incorrect');
+  });
+  
+  if (oi === q.correct) {
+    addXP(15);
+    STATE.readingProgress[id + '-' + qi] = true;
+    saveState();
+  }
+}
+
+function checkTF(id, qi, answer) {
+  const reading = [...readingsA1, ...readingsA2].find(r => r.id === id);
+  const q = reading.questions[qi];
+  
+  if (answer === q.correct) {
+    alert('✅ Correct!');
+    addXP(15);
+    STATE.readingProgress[id + '-' + qi] = true;
+    saveState();
+  } else {
+    alert('❌ Incorrect. The answer is: ' + (q.correct ? 'True' : 'False'));
+  }
+}
+
+function checkSA(id, qi) {
+  const reading = [...readingsA1, ...readingsA2].find(r => r.id === id);
+  const q = reading.questions[qi];
+  const userAnswer = document.getElementById('sa-' + id + '-' + qi).value.trim().toLowerCase();
+  
+  if (userAnswer.includes(q.answer.toLowerCase())) {
+    alert('✅ Correct!');
+    addXP(15);
+    STATE.readingProgress[id + '-' + qi] = true;
+    saveState();
+  } else {
+    alert('❌ Not quite. The answer is: ' + q.answer);
+  }
+}
+
+function buildA2Readings() {
+  const container = document.getElementById('a2Readings');
+  container.innerHTML = readingsA2.map((r) => {
+    let quizHtml = r.questions.map((q, qi) => {
+      if (q.type === 'mc') {
+        return `<div class="card" style="margin:8px 0;"><p><strong>${qi+1}.</strong> ${q.q}</p>${q.options.map((opt, oi) => `<label class="quiz-option" onclick="checkReading('${r.id}', ${qi}, ${oi})"><input type="radio" name="read-${r.id}-${qi}" value="${oi}"><span>${opt}</span></label>`).join('')}</div>`;
+      } else if (q.type === 'matching') {
+        return `<div class="card" style="margin:8px 0;"><p><strong>${qi+1}.</strong> Match the pairs:</p>${q.pairs.map(p => `<p>• ${p[0]} → <strong>${p[1]}</strong></p>`).join('')}</div>`;
+      } else if (q.type === 'gap') {
+        return `<div class="card" style="margin:8px 0;"><p><strong>${qi+1}.</strong> Fill in the gap: ${q.sentence}</p><input type="text" class="input" id="sa-${r.id}-${qi}" placeholder="Fill in the gap..."><button class="btn btn-primary btn-sm mt-2" onclick="checkSA('${r.id}', ${qi})">Check</button></div>`;
+      } else {
+        return `<div class="card" style="margin:8px 0;"><p><strong>${qi+1}.</strong> ${q.q}</p><div class="flex gap-2"><button class="btn btn-success btn-sm" onclick="checkTF('${r.id}', ${qi}, true)">True</button><button class="btn btn-danger btn-sm" onclick="checkTF('${r.id}', ${qi}, false)">False</button></div></div>`;
+      }
+    }).join('');
+    
+    return `<div class="card"><h3 class="card-title">📖 ${r.title} (${r.topic})</h3><button class="btn btn-sm btn-outline mb-2" onclick="readAloud('${r.id}')">🔊 Read Aloud</button><div class="reading-passage">${r.text.replace(/\n/g, '<br>')}</div><h4 style="margin:16px 0 8px;">📝 Questions</h4><div id="quiz-${r.id}">${quizHtml}</div></div>`;
+  }).join('');
+}
+
+// ==================== VOCABULARY LAB ====================
+const vocabList = [
+  { word: 'routine', phonetic: '/ruːˈtiːn/', meaning: 'Alışkanlık, rutin', turkish: 'Rutin', example: 'I have a morning routine.', family: ['routine (n)', 'routinely (adv)'] },
+  { word: 'breakfast', phonetic: '/ˈbrekfəst/', meaning: 'Kahvaltı', turkish: 'Kahvaltı', example: 'I eat breakfast at 7 AM.', family: ['breakfast (n)'] },
+  { word: 'subject', phonetic: '/ˈsʌbdʒekt/', meaning: 'Ders, konu', turkish: 'Konu/Ders', example: 'Maths is my favourite subject.', family: ['subject (n)', 'subjective (adj)'] },
+  { word: 'healthy', phonetic: '/ˈhelθi/', meaning: 'Sağlıklı', turkish: 'Sağlıklı', example: 'Exercise is healthy for you.', family: ['healthy (adj)', 'health (n)', 'healthily (adv)'] },
+  { word: 'favourite', phonetic: '/ˈfeɪvərɪt/', meaning: 'En sevilen', turkish: 'Favori', example: 'Blue is my favourite colour.', family: ['favourite (adj/n)'] },
+  { word: 'patient', phonetic: '/ˈpeɪʃənt/', meaning: 'Sabırlı / Hasta', turkish: 'Sabırlı', example: 'Teachers need to be patient.', family: ['patient (adj)', 'patience (n)', 'patiently (adv)'] },
+  { word: 'delicious', phonetic: '/dɪˈlɪʃəs/', meaning: 'Lezzetli', turkish: 'Lezzetli', example: 'The cake was delicious.', family: ['delicious (adj)'] },
+  { word: 'experiment', phonetic: '/ɪkˈsperɪmənt/', meaning: 'Deney', turkish: 'Deney', example: 'We did a science experiment.', family: ['experiment (n)', 'experimental (adj)'] },
+  { word: 'confidence', phonetic: '/ˈkɒnfɪdəns/', meaning: 'Güven', turkish: 'Özgüven', example: 'Speaking English gives me confidence.', family: ['confidence (n)', 'confident (adj)', 'confidently (adv)'] },
+  { word: 'perspective', phonetic: '/pəˈspektɪv/', meaning: 'Bakış açısı', turkish: 'Bakış açısı', example: 'Travel changes your perspective.', family: ['perspective (n)'] },
+  { word: 'culture', phonetic: '/ˈkʌltʃər/', meaning: 'Kültür', turkish: 'Kültür', example: 'I want to learn about different cultures.', family: ['culture (n)', 'cultural (adj)'] },
+  { word: 'experience', phonetic: '/ɪkˈspɪəriəns/', meaning: 'Deneyim', turkish: 'Deneyim', example: 'It was an amazing experience.', family: ['experience (n)', 'experienced (adj)'] },
+  { word: 'comfortable', phonetic: '/ˈkʌmftəbl/', meaning: 'Rahat', turkish: 'Rahat', example: 'The chairs are very comfortable.', family: ['comfortable (adj)', 'comfortably (adv)', 'comfort (n)'] },
+  { word: 'determination', phonetic: '/dɪˌtɜːmɪˈneɪʃn/', meaning: 'Kararlılık', turkish: 'Kararlılık', example: 'She shows great determination.', family: ['determination (n)', 'determined (adj)'] },
+  { word: 'encourage', phonetic: '/ɪnˈkʌrɪdʒ/', meaning: 'Cesaretlendirmek', turkish: 'Cesaretlendirmek', example: 'Teachers encourage students to study.', family: ['encourage (v)', 'encouragement (n)', 'encouraging (adj)'] },
+  { word: 'abroad', phonetic: '/əˈbrɔːd/', meaning: 'Yurt dışında', turkish: 'Yurt dışında', example: 'I want to study abroad.', family: ['abroad (adv)'] },
+  { word: 'ancient', phonetic: '/ˈeɪnʃənt/', meaning: 'Antik, eski', turkish: 'Antik', example: 'We visited ancient ruins.', family: ['ancient (adj)'] },
+  { word: 'beautiful', phonetic: '/ˈbjuːtɪfl/', meaning: 'Güzel', turkish: 'Güzel', example: 'The sunset was beautiful.', family: ['beautiful (adj)', 'beautifully (adv)', 'beauty (n)'] },
+  { word: 'communication', phonetic: '/kəˌmjuːnɪˈkeɪʃn/', meaning: 'İletişim', turkish: 'İletişim', example: 'Good communication is important.', family: ['communication (n)', 'communicate (v)', 'communicative (adj)'] },
+  { word: 'determination', phonetic: '/dɪˌtɜːmɪˈneɪʃn/', meaning: 'Kararlılık', turkish: 'Kararlılık', example: 'Hard work needs determination.', family: ['determination (n)', 'determined (adj)'] },
+  { word: 'environment', phonetic: '/ɪnˈvaɪrənmənt/', meaning: 'Çevre', turkish: 'Çevre', example: 'We should protect the environment.', family: ['environment (n)', 'environmental (adj)'] },
+  { word: 'furniture', phonetic: '/ˈfɜːnɪtʃər/', meaning: 'Mobilya', turkish: 'Mobilya', example: 'We bought new furniture.', family: ['furniture (n)'] },
+  { word: 'generous', phonetic: '/ˈdʒenərəs/', meaning: 'Cömert', turkish: 'Cömert', example: 'She is very generous.', family: ['generous (adj)', 'generously (adv)', 'generosity (n)'] },
+  { word: 'homework', phonetic: '/ˈhəʊmwɜːk/', meaning: 'Ödev', turkish: 'Ödev', example: 'I finished my homework.', family: ['homework (n)'] },
+  { word: 'important', phonetic: '/ɪmˈpɔːtnt/', meaning: 'Önemli', turkish: 'Önemli', example: 'Education is very important.', family: ['important (adj)', 'importance (n)', 'importantly (adv)'] },
+  { word: 'journey', phonetic: '/ˈdʒɜːni/', meaning: 'Yolculuk', turkish: 'Yolculuk', example: 'The journey was long but fun.', family: ['journey (n)'] },
+  { word: 'knowledge', phonetic: '/ˈnɒlɪdʒ/', meaning: 'Bilgi', turkish: 'Bilgi', example: 'Knowledge is power.', family: ['knowledge (n)', 'knowledgeable (adj)'] },
+  { word: 'language', phonetic: '/ˈlæŋɡwɪdʒ/', meaning: 'Dil', turkish: 'Dil', example: 'English is a global language.', family: ['language (n)', 'linguistic (adj)'] },
+  { word: 'mountain', phonetic: '/ˈmaʊntɪn/', meaning: 'Dağ', turkish: 'Dağ', example: 'We climbed the mountain.', family: ['mountain (n)', 'mountainous (adj)'] },
+  { word: 'necessary', phonetic: '/ˈnesəsəri/', meaning: 'Gerekli', turkish: 'Gerekli', example: 'Sleep is necessary for health.', family: ['necessary (adj)', 'necessarily (adv)', 'necessity (n)'] },
+  { word: 'opportunity', phonetic: '/ˌɒpəˈtjuːnəti/', meaning: 'Fırsat', turkish: 'Fırsat', example: 'This is a great opportunity.', family: ['opportunity (n)'] },
+  { word: 'passenger', phonetic: '/ˈpæsɪndʒər/', meaning: 'Yolcu', turkish: 'Yolcu', example: 'The passengers were happy.', family: ['passenger (n)'] },
+  { word: 'question', phonetic: '/ˈkwestʃən/', meaning: 'Soru', turkish: 'Soru', example: 'I have a question.', family: ['question (n)', 'question (v)'] },
+  { word: 'restaurant', phonetic: '/ˈrestrɒnt/', meaning: 'Restoran', turkish: 'Restoran', example: 'We ate at a nice restaurant.', family: ['restaurant (n)'] },
+  { word: 'schedule', phonetic: '/ˈʃedjuːl/', meaning: 'Takvim, program', turkish: 'Program', example: 'What is your schedule today?', family: ['schedule (n)', 'schedule (v)'] },
+  { word: 'temperature', phonetic: '/ˈtemprətʃər/', meaning: 'Sıcaklık', turkish: 'Sıcaklık', example: 'The temperature is 25 degrees.', family: ['temperature (n)'] },
+  { word: 'understand', phonetic: '/ˌʌndəˈstænd/', meaning: 'Anlamak', turkish: 'Anlamak', example: 'I understand the lesson.', family: ['understand (v)', 'understanding (n/adj)'] },
+  { word: 'vocabulary', phonetic: '/vəˈkæbjələri/', meaning: 'Kelime hazinesi', turkish: 'Kelime bilgisi', example: 'I learn new vocabulary every day.', family: ['vocabulary (n)'] },
+  { word: 'weather', phonetic: '/ˈweðər/', meaning: 'Hava durumu', turkish: 'Hava', example: 'The weather is nice today.', family: ['weather (n)'] },
+  { word: 'yesterday', phonetic: '/ˈjestədeɪ/', meaning: 'Dün', turkish: 'Dün', example: 'I studied yesterday.', family: ['yesterday (adv/n)'] },
+  { word: 'zoology', phonetic: '/zuːˈɒlədʒi/', meaning: 'Hayvan bilimi', turkish: 'Zooloji', example: 'She studies zoology at university.', family: ['zoology (n)', 'zoologist (n)'] },
+  { word: 'activity', phonetic: '/ækˈtɪvəti/', meaning: 'Aktivite', turkish: 'Etkinlik', example: 'Swimming is a healthy activity.', family: ['activity (n)', 'active (adj)', 'actively (adv)'] },
+  { word: 'believe', phonetic: '/bɪˈliːv/', meaning: 'İnanmak', turkish: 'İnanmak', example: 'I believe in myself.', family: ['believe (v)', 'belief (n)', 'believer (n)'] },
+  { word: 'celebrate', phonetic: '/ˈselɪbreɪt/', meaning: 'Kutlamak', turkish: 'Kutlamak', example: 'We celebrate birthdays together.', family: ['celebrate (v)', 'celebration (n)'] },
+  { word: 'describe', phonetic: '/dɪˈskraɪb/', meaning: 'Tanımlamak', turkish: 'Tanımlamak', example: 'Can you describe your house?', family: ['describe (v)', 'description (n)'] },
+  { word: 'enough', phonetic: '/ɪˈnʌf/', meaning: 'Yeterli', turkish: 'Yeterli', example: 'I have enough money.', family: ['enough (adj/adv)'] },
+  { word: 'foreign', phonetic: '/ˈfɒrən/', meaning: 'Yabancı', turkish: 'Yabancı', example: 'She speaks a foreign language.', family: ['foreign (adj)', 'foreigner (n)'] },
+  { word: 'government', phonetic: '/ˈɡʌvənmənt/', meaning: 'Hükümet', turkish: 'Hükümet', example: 'The government makes laws.', family: ['government (n)', 'govern (v)'] },
+  { word: 'imagine', phonetic: '/ɪˈmædʒɪn/', meaning: 'Hayal etmek', turkish: 'Hayal etmek', example: 'Imagine you are on a beach.', family: ['imagine (v)', 'imagination (n)', 'imaginative (adj)'] },
+  { word: 'journey', phonetic: '/ˈdʒɜːni/', meaning: 'Yolculuk', turkish: 'Yolculuk', example: 'The journey was exciting.', family: ['journey (n)'] }
+];
+
+function showVocabSection(section) {
+  const container = document.getElementById('vocabSection');
+  
+  if (section === 'list') {
+    container.innerHTML = `
+      <div class="card">
+        <h3 class="card-title">📋 Vocabulary List (50+ Words)</h3>
+        <input type="text" class="input mb-2" id="vocabSearch" placeholder="🔍 Search words..." oninput="filterVocab()">
+        <div class="grid grid-3" id="vocabGrid">
+          ${vocabList.map((v, i) => `
+            <div class="vocab-card" data-word="${v.word.toLowerCase()}">
+              <div class="vocab-word">${v.word}</div>
+              <div class="vocab-phonetic">${v.phonetic}</div>
+              <div class="vocab-meaning"><strong>Meaning:</strong> ${v.meaning}</div>
+              <div class="vocab-meaning"><strong>Türkçe:</strong> ${v.turkish}</div>
+              <div class="vocab-example">"${v.example}"</div>
+              <div style="margin-top:8px;">
+                ${v.family.map(f => `<span class="tag">${f}</span>`).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  } else if (section === 'flashcards') {
+    buildFlashcards(container);
+  } else if (section === 'matching') {
+    buildMatchingGame(container);
+  } else if (section === 'memory') {
+    buildMemoryGame(container);
+  } else if (section === 'quiz') {
+    buildVocabQuiz(container);
+  } else if (section === 'wordsearch') {
+    buildWordSearch(container);
+  }
+}
+
+function filterVocab() {
+  const query = document.getElementById('vocabSearch').value.toLowerCase();
+  document.querySelectorAll('.vocab-card').forEach(card => {
+    card.style.display = card.dataset.word.includes(query) ? 'block' : 'none';
+  });
+}
+
+function buildFlashcards(container) {
+  let idx = 0;
+  const render = () => {
+    const v = vocabList[idx];
+    container.innerHTML = `
+      <div class="card">
+        <h3 class="card-title">🃏 Flashcards (${idx + 1}/${vocabList.length})</h3>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+          <div class="flashcard-word" id="fcWord">${v.word}</div>
+          <div class="flashcard-hint" id="fcHint">Click to reveal meaning</div>
+        </div>
+        <div id="fcMeaning" style="display:none; text-align:center; margin:16px 0; padding:16px; background:var(--bg); border-radius:var(--radius);">
+          <p><strong>Phonetic:</strong> ${v.phonetic}</p>
+          <p><strong>Meaning:</strong> ${v.meaning}</p>
+          <p><strong>Türkçe:</strong> ${v.turkish}</p>
+          <p><strong>Example:</strong> ${v.example}</p>
+        </div>
+        <div class="flex gap-2 justify-center mt-2">
+          <button class="btn btn-primary" onclick="flashcardIdx(${idx - 1})">⬅️ Previous</button>
+          <button class="btn btn-success" onclick="flashcardIdx(${idx + 1})">Next ➡️</button>
+          <button class="btn btn-warning" onclick="markVocabLearned(${idx})">✅ Learned</button>
+        </div>
+      </div>
+    `;
+    
+    setTimeout(() => {
+      const fc = container.querySelector('.flashcard');
+      fc.onclick = function() {
+        this.classList.toggle('flipped');
+        document.getElementById('fcMeaning').style.display = document.getElementById('fcMeaning').style.display === 'none' ? 'block' : 'none';
+      };
+    }, 100);
+  };
+  
+  window.flashcardIdx = (newIdx) => {
+    if (newIdx < 0) newIdx = vocabList.length - 1;
+    if (newIdx >= vocabList.length) newIdx = 0;
+    idx = newIdx;
+    render();
+  };
+  
+  render();
+}
+
+function markVocabLearned(idx) {
+  STATE.vocabProgress[vocabList[idx].word] = true;
+  saveState();
+  addXP(10);
+  alert('✅ Word marked as learned! +10 XP');
+}
+
+function buildMatchingGame(container) {
+  const pairs = vocabList.slice(0, 15);
+  const shuffled = [...pairs].sort(() => Math.random() - 0.5);
+  
+  let html = `<div class="card"><h3 class="card-title">🔗 Matching Game</h3><p>Match the word with its Turkish meaning.</p><div style="margin:16px 0;">`;
+  
+  pairs.forEach((p, i) => {
+    html += `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin:8px 0; padding:12px; background:var(--bg); border-radius:var(--radius);">
+        <strong>${p.word}</strong>
+        <select class="input" style="max-width:200px;" id="match-${i}">
+          <option value="">Select...</option>
+          ${shuffled.map((s, j) => `<option value="${j}">${s.turkish}</option>`).join('')}
+        </select>
+      </div>
+    `;
+  });
+  
+  html += `</div><button class="btn btn-primary" onclick="checkMatching()">Check Answers</button><div id="matchFeedback"></div></div>`;
+  container.innerHTML = html;
+  
+  window.checkMatching = () => {
+    let correct = 0;
+    pairs.forEach((p, i) => {
+      const sel = document.getElementById('match-' + i);
+      const selected = shuffled[parseInt(sel.value)];
+      if (selected && selected.word === p.word) {
+        sel.style.borderColor = 'var(--success)';
+        correct++;
+      } else {
+        sel.style.borderColor = 'var(--danger)';
+      }
+    });
+    
+    document.getElementById('matchFeedback').innerHTML = `<div class="feedback ${correct === pairs.length ? 'success' : 'error'}">${correct}/${pairs.length} correct! ${correct === pairs.length ? '🎉 Perfect!' : 'Try again!'}</div>`;
+    if (correct === pairs.length) addXP(50);
+  };
+}
+
+function buildMemoryGame(container) {
+  const words = vocabList.slice(0, 8);
+  let cards = [];
+  words.forEach(w => {
+    cards.push({ id: w.word, text: w.word, type: 'word' });
+    cards.push({ id: w.word, text: w.turkish, type: 'meaning' });
+  });
+  cards.sort(() => Math.random() - 0.5);
+  
+  let flipped = [];
+  let matched = 0;
+  let moves = 0;
+  
+  const render = () => {
+    container.innerHTML = `
+      <div class="card">
+        <h3 class="card-title">🧩 Memory Card Game</h3>
+        <p>Moves: ${moves} | Matched: ${matched}/${words.length}</p>
+        <div class="memory-grid">
+          ${cards.map((c, i) => `
+            <div class="memory-card ${c.flipped ? 'flipped' : ''} ${c.matched ? 'matched' : ''}" onclick="flipCard(${i})">
+              ${c.flipped || c.matched ? c.text : '?'}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  };
+  
+  window.flipCard = (idx) => {
+    if (cards[idx].flipped || cards[idx].matched || flipped.length >= 2) return;
+    
+    cards[idx].flipped = true;
+    flipped.push(idx);
+    render();
+    
+    if (flipped.length === 2) {
+      moves++;
+      if (cards[flipped[0]].id === cards[flipped[1]].id && flipped[0] !== flipped[1]) {
+        cards[flipped[0]].matched = true;
+        cards[flipped[1]].matched = true;
+        matched++;
+        STATE.vocabProgress[cards[flipped[0]].id] = true;
+        saveState();
+      }
+      setTimeout(() => {
+        flipped.forEach(i => { if (!cards[i].matched) cards[i].flipped = false; });
+        flipped = [];
+        render();
+        if (matched === words.length) {
+          addXP(100);
+          showConfetti();
+          alert('🎉 You matched all pairs! +100 XP');
+        }
+      }, 1000);
+    }
+  };
+  
+  render();
+}
+
+function buildVocabQuiz(container) {
+  const questions = [];
+  for (let i = 0; i < 20; i++) {
+    const correctIdx = Math.floor(Math.random() * vocabList.length);
+    const correct = vocabList[correctIdx];
+    const wrongOptions = vocabList.filter((_, j) => j !== correctIdx).sort(() => Math.random() - 0.5).slice(0, 3);
+    const options = [...wrongOptions.map(w => w.turkish), correct.turkish].sort(() => Math.random() - 0.5);
+    questions.push({ word: correct.word, options, correct: options.indexOf(correct.turkish) });
+  }
+  
+  let idx = 0;
+  let score = 0;
+  
+  const render = () => {
+    if (idx >= questions.length) {
+      container.innerHTML = `<div class="card text-center"><h2>🎉 Quiz Complete!</h2><p style="font-size:1.5rem; font-weight:800; color:var(--primary);">Score: ${score}/${questions.length}</p><button class="btn btn-primary mt-2" onclick="showVocabSection('quiz')">Try Again</button></div>`;
+      addXP(score * 5);
+      return;
+    }
+    
+    const q = questions[idx];
+    container.innerHTML = `
+      <div class="card">
+        <h3 class="card-title">❓ Vocabulary Quiz (${idx + 1}/${questions.length})</h3>
+        <p style="font-size:1.3rem; font-weight:700; margin:16px 0;">What does "<span style="color:var(--primary);">${q.word}</span>" mean?</p>
+        ${q.options.map((opt, i) => `
+          <label class="quiz-option" onclick="checkVocabAnswer(${i}, ${q.correct})">
+            <span>${opt}</span>
+          </label>
+        `).join('')}
+        <div id="vocabFeedback"></div>
+      </div>
+    `;
+  };
+  
+  window.checkVocabAnswer = (chosen, correct) => {
+    const options = document.querySelectorAll('.quiz-option');
+    options.forEach((opt, i) => {
+      opt.classList.remove('correct', 'incorrect');
+      if (i === correct) opt.classList.add('correct');
+      if (i === chosen && i !== correct) opt.classList.add('incorrect');
+    });
+    
+    if (chosen === correct) {
+      score++;
+      document.getElementById('vocabFeedback').innerHTML = '<div class="feedback success">✅ Correct!</div>';
+      addXP(5);
+    } else {
+      document.getElementById('vocabFeedback').innerHTML = '<div class="feedback error">❌ Incorrect.</div>';
+    }
+    
+    setTimeout(() => { idx++; render(); }, 1500);
+  };
+  
+  render();
+}
+
+function buildWordSearch(container) {
+  const size = 12;
+  const words = ['routine', 'breakfast', 'healthy', 'culture', 'journey', 'weather'].filter(w => w.length <= size);
+  const grid = Array(size).fill(null).map(() => Array(size).fill(''));
+  
+  // Simple word placement (horizontal)
+  words.forEach(word => {
+    const row = Math.floor(Math.random() * size);
+    const col = Math.floor(Math.random() * (size - word.length));
+    for (let i = 0; i < word.length; i++) {
+      grid[row][col + i] = word[i];
+    }
+  });
+  
+  // Fill empty cells
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      if (!grid[r][c]) grid[r][c] = letters[Math.floor(Math.random() * 26)];
+    }
+  }
+  
+  container.innerHTML = `
+    <div class="card">
+      <h3 class="card-title">🔍 Word Search</h3>
+      <p>Find these words: ${words.join(', ')}</p>
+      <div style="overflow-x:auto;">
+        <div class="wordsearch-grid" style="grid-template-columns: repeat(${size}, 36px);">
+          ${grid.flat().map((l, i) => `<div class="wordsearch-cell" onclick="this.classList.toggle('selected')">${l}</div>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ==================== SPEAKING STUDIO ====================
+const speakingData = {
+  'present-simple': [
+    { q: 'What time do you usually wake up?', vocab: 'wake up, usually, alarm, morning', model: 'I usually wake up at seven o\'clock every morning.', tr: 'Genellikle her sabah saat yedide uyanırım.' },
+    { q: 'What do you eat for breakfast?', vocab: 'bread, cheese, eggs, milk, tea', model: 'I usually eat bread with cheese and drink tea for breakfast.', tr: 'Genellikle kahvaltıda peynirli ekmek ve çay içerim.' },
+    { q: 'How do you go to school?', vocab: 'walk, bus, car, bike, metro', model: 'I go to school by bus every day.', tr: 'Her gün okula otobüsle giderim.' },
+    { q: 'What subjects do you like?', vocab: 'maths, science, English, history, art', model: 'I like English and maths the most.', tr: 'En çok İngilizce ve matematik severim.' },
+    { q: 'What do you do after school?', vocab: 'homework, play, watch TV, read', model: 'After school, I do my homework and then play with my friends.', tr: 'Okuldan sonra ödevimi yaparım ve sonra arkadaşlarımla oynarım.' },
+    { q: 'Do you play any sports?', vocab: 'football, basketball, swimming, tennis', model: 'Yes, I play football every weekend.', tr: 'Evet, her hafta sonu futbol oynarım.' },
+    { q: 'What does your father do?', vocab: 'works, office, doctor, teacher, engineer', model: 'My father works as an engineer.', tr: 'Babam mühendis olarak çalışır.' },
+    { q: 'Where do you live?', vocab: 'house, apartment, city, street, neighbourhood', model: 'I live in a small house in Ankara.', tr: 'Ankara\'da küçük bir evde yaşarım.' },
+    { q: 'How often do you read books?', vocab: 'always, sometimes, never, every day', model: 'I read books every evening before bed.', tr: 'Her akşam yatmadan önce kitap okurum.' },
+    { q: 'What time do you go to bed?', vocab: 'sleep, tired, night, usually', model: 'I usually go to bed at ten o\'clock.', tr: 'Genellikle saat onda yatarım.' },
+    { q: 'Do you help at home?', vocab: 'clean, cook, wash, tidy', model: 'Yes, I help my mother with cooking.', tr: 'Evet, anneme yemek yapmada yardım ederim.' },
+    { q: 'What music do you like?', vocab: 'pop, rock, classical, listen, playlist', model: 'I like pop music and I listen to it every day.', tr: 'Pop müzik severim ve her gün dinlerim.' },
+    { q: 'How many friends do you have?', vocab: 'best friends, school friends, close', model: 'I have three best friends from school.', tr: 'Okuldan üç yakın arkadaşım var.' },
+    { q: 'What is your favourite season?', vocab: 'spring, summer, autumn, winter', model: 'My favourite season is summer because I love the beach.', tr: 'En sevdiğim mevsim yaz çünkü plajı severim.' },
+    { q: 'Do you watch TV every day?', vocab: 'series, films, news, channels', model: 'I watch TV only on weekends.', tr: 'Sadece hafta sonları televizyon izlerim.' }
+  ],
+  'present-continuous': [
+    { q: 'What are you doing right now?', vocab: 'studying, speaking, practicing, learning', model: 'I am practicing my English right now.', tr: 'Şu anda İngilizcemi pratik yapıyorum.' },
+    { q: 'What is your family doing at the moment?', vocab: 'cooking, watching, reading, working', model: 'My mother is cooking dinner and my father is reading a newspaper.', tr: 'Annem yemek pişiriyor ve babam gazete okuyor.' },
+    { q: 'What are you wearing today?', vocab: 'shirt, trousers, dress, shoes, jacket', model: 'I am wearing a blue shirt and black trousers.', tr: 'Mavi gömlek ve siyah pantolon giyiyorum.' },
+    { q: 'Is it raining now?', vocab: 'sun, clouds, wet, umbrella', model: 'No, it is not raining. The sun is shining.', tr: 'Hayır, yağmur yağmıyor. Güneş parlıyor.' },
+    { q: 'What are your friends doing now?', vocab: 'playing, studying, sleeping, eating', model: 'My friends are playing football in the park.', tr: 'Arkadaşlarım parkta futbol oynuyor.' },
+    { q: 'What are you learning this year?', vocab: 'English, maths, science, music', model: 'I am learning English and I am also studying maths.', tr: 'İngilizce öğreniyorum ve ayrıca matematik çalışıyorum.' },
+    { q: 'What is your teacher doing?', vocab: 'teaching, writing, explaining, helping', model: 'My teacher is explaining the grammar lesson.', tr: 'Öğretmenim dilbilgisi dersini anlatıyor.' },
+    { q: 'Are you listening to music now?', vocab: 'headphones, song, playlist, artist', model: 'Yes, I am listening to my favourite song.', tr: 'Evet, en sevdiğim şarkıyı dinliyorum.' },
+    { q: 'What is happening outside?', vocab: 'people, cars, birds, weather', model: 'Some children are playing outside and birds are singing.', tr: 'Bazı çocuklar dışarıda oynuyor ve kuşlar şarkı söylüyor.' },
+    { q: 'What are you thinking about?', vocab: 'future, plans, dreams, school', model: 'I am thinking about my future plans.', tr: 'Gelecek planlarımı düşünüyorum.' },
+    { q: 'Is anyone in your house sleeping?', vocab: 'bedroom, quiet, tired, rest', model: 'My little sister is sleeping in her bedroom.', tr: 'Küçük kız kardeşim yatak odasında uyuyor.' },
+    { q: 'What are you eating for lunch today?', vocab: 'rice, chicken, salad, soup', model: 'I am eating chicken with rice for lunch.', tr: 'Öğle yemeğinde pilavlı tavuk yiyorum.' },
+    { q: 'Why are you learning English?', vocab: 'travel, work, communicate, future', model: 'I am learning English because I want to travel.', tr: 'Seyahat etmek istediğim için İngilizce öğreniyorum.' },
+    { q: 'What is your best friend doing now?', vocab: 'school, hobby, sport, study', model: 'My best friend is studying for the exam.', tr: 'En iyi arkadaşım sınav için çalışıyor.' },
+    { q: 'Are you feeling happy today?', vocab: 'happy, tired, excited, nervous', model: 'Yes, I am feeling very happy today.', tr: 'Evet, bugün kendimi çok mutlu hissediyorum.' }
+  ],
+  'past-simple': [
+    { q: 'What did you do yesterday?', vocab: 'yesterday, morning, afternoon, evening', model: 'Yesterday, I went to school and played with my friends.', tr: 'Dün okula gittim ve arkadaşlarımla oynadım.' },
+    { q: 'Where did you go last weekend?', vocab: 'park, cinema, shopping, home', model: 'Last weekend, I went to the cinema with my family.', tr: 'Geçen hafta sonu ailemle sinemaya gittim.' },
+    { q: 'What did you eat for dinner last night?', vocab: 'pizza, pasta, rice, soup', model: 'I ate pasta with tomato sauce last night.', tr: 'Dün gece domates soslu makarna yedim.' },
+    { q: 'Did you watch TV yesterday?', vocab: 'film, series, news, programme', model: 'Yes, I watched a film on TV yesterday evening.', tr: 'Evet, dün akşam televizyonda film izledim.' },
+    { q: 'When did you start learning English?', vocab: 'primary school, years ago, since', model: 'I started learning English in primary school.', tr: 'İngilizce öğrenmeye ilkokulda başladım.' },
+    { q: 'What did you buy last week?', vocab: 'book, clothes, food, game', model: 'I bought a new book last week.', tr: 'Geçen hafta yeni bir kitap aldım.' },
+    { q: 'Did you travel anywhere last year?', vocab: 'holiday, city, country, abroad', model: 'Yes, I traveled to Antalya last summer.', tr: 'Evet, geçen yaz Antalya\'ya seyahat ettim.' },
+    { q: 'Who did you meet yesterday?', vocab: 'friends, family, teacher, neighbour', model: 'I met my old friend from primary school.', tr: 'İlkokuldan eski bir arkadaşımı gördüm.' },
+    { q: 'How did you feel yesterday?', vocab: 'happy, sad, tired, excited', model: 'I felt very happy yesterday because it was my birthday.', tr: 'Dün çok mutluydum çünkü doğum günümdü.' },
+    { q: 'What time did you wake up this morning?', vocab: 'early, late, alarm, seven', model: 'I woke up at six o\'clock this morning.', tr: 'Bu sabah saat altıda uyandım.' },
+    { q: 'Did you finish your homework yesterday?', vocab: 'easy, difficult, long, short', model: 'Yes, I finished my homework before dinner.', tr: 'Evet, akşam yemeğinden önce ödevimi bitirdim.' },
+    { q: 'What sport did you play as a child?', vocab: 'football, swimming, running, cycling', model: 'I played football when I was younger.', tr: 'Daha gençken futbol oynardım.' },
+    { q: 'Did you visit your grandparents last month?', vocab: 'grandmother, grandfather, house, village', model: 'Yes, I visited my grandparents last month.', tr: 'Evet, geçen ay büyükannem ve büyükbabamı ziyaret ettim.' },
+    { q: 'What did you learn in school yesterday?', vocab: 'lesson, topic, grammar, reading', model: 'I learned about the Past Simple tense.', tr: 'Geçmiş Zaman hakkında öğrendim.' },
+    { q: 'How was your last birthday?', vocab: 'party, gifts, cake, family', model: 'My last birthday was amazing. My family gave me many gifts.', tr: 'Son doğum günüm harikaydı. Ailem bana birçok hediye verdi.' }
+  ],
+  'will': [
+    { q: 'What will you do after school today?', vocab: 'homework, play, rest, study', model: 'I will go home and do my homework.', tr: 'Eve gideceğim ve ödevimi yapacağım.' },
+    { q: 'Where will you go on holiday next year?', vocab: 'beach, mountains, city, abroad', model: 'I will go to the beach with my family.', tr: 'Ailemle plaja gideceğim.' },
+    { q: 'What job will you have in the future?', vocab: 'doctor, teacher, engineer, artist', model: 'I will become a doctor in the future.', tr: 'Gelecekte doktor olacağım.' },
+    { q: 'Will you travel abroad one day?', vocab: 'Europe, Asia, America, Africa', model: 'Yes, I will travel to many countries.', tr: 'Evet, birçok ülkeye seyahat edeceğim.' },
+    { q: 'What will you eat for dinner tonight?', vocab: 'cook, order, restaurant, home', model: 'I will cook dinner with my mother tonight.', tr: 'Bu akşam annemle yemek pişireceğim.' },
+    { q: 'Will you learn another language?', vocab: 'Spanish, French, German, Japanese', model: 'I will learn Spanish after I finish English.', tr: 'İngilizceyi bitirdikten sonra İspanyolca öğreneceğim.' },
+    { q: 'How old will you be in 2030?', vocab: 'years, grow, age, future', model: 'I will be twenty years old in 2030.', tr: '2030\'da yirmi yaşında olacağım.' },
+    { q: 'Will you have a pet?', vocab: 'dog, cat, fish, bird', model: 'Yes, I will have a dog.', tr: 'Evet, bir köpeğim olacak.' },
+    { q: 'What will the weather be like tomorrow?', vocab: 'sunny, rainy, cloudy, cold', model: 'I think it will be sunny tomorrow.', tr: 'Bence yarın güneşli olacak.' },
+    { q: 'Will you go to university?', vocab: 'study, degree, campus, college', model: 'Yes, I will go to university after high school.', tr: 'Evet, liseden sonra üniversiteye gideceğim.' },
+    { q: 'Where will you live in ten years?', vocab: 'city, country, house, apartment', model: 'I will live in a big city.', tr: 'Büyük bir şehirde yaşayacağım.' },
+    { q: 'Will you get married one day?', vocab: 'family, children, love, home', model: 'Maybe. I will think about it later.', tr: 'Belki. Daha sonra düşüneceğim.' },
+    { q: 'What will you buy with your first salary?', vocab: 'car, phone, computer, clothes', model: 'I will buy a new laptop with my first salary.', tr: 'İlk maaşımla yeni bir dizüstü bilgisayar alacağım.' },
+    { q: 'Will you help your friends in the future?', vocab: 'support, advice, money, time', model: 'Yes, I will always help my friends.', tr: 'Evet, her zaman arkadaşlarıma yardım edeceğim.' },
+    { q: 'What will happen if you study hard?', vocab: 'exam, grades, success, proud', model: 'If I study hard, I will get good grades.', tr: 'Sıkı çalışırsam iyi notlar alacağım.' }
+  ],
+  'going-to': [
+    { q: 'What are you going to do this weekend?', vocab: 'friends, park, cinema, home', model: 'I am going to play football with my friends this weekend.', tr: 'Bu hafta sonu arkadaşlarımla futbol oynayacağım.' },
+    { q: 'What are you going to study at university?', vocab: 'medicine, engineering, law, art', model: 'I am going to study medicine at university.', tr: 'Üniversitede tıp okuyacağım.' },
+    { q: 'Where are you going to travel this summer?', vocab: 'sea, mountains, city, abroad', model: 'I am going to travel to Bodrum this summer.', tr: 'Bu yaz Bodrum\'a seyahat edeceğim.' },
+    { q: 'Are you going to learn a new skill?', vocab: 'cooking, coding, painting, swimming', model: 'I am going to learn how to code.', tr: 'Kodlama öğrenmeyi planlıyorum.' },
+    { q: 'What are you going to eat for lunch today?', vocab: 'school, cafeteria, home, restaurant', model: 'I am going to eat a sandwich for lunch.', tr: 'Öğle yemeğinde sandviç yiyeceğim.' },
+    { q: 'Are you going to watch a film tonight?', vocab: 'cinema, TV, Netflix, friends', model: 'Yes, I am going to watch a film with my family.', tr: 'Evet, ailemle film izleyeceğim.' },
+    { q: 'What are you going to wear to the party?', vocab: 'dress, shirt, shoes, hat', model: 'I am going to wear a new dress.', tr: 'Yeni bir elbise giyeceğim.' },
+    { q: 'Are you going to join a club at school?', vocab: 'drama, sports, music, science', model: 'I am going to join the drama club.', tr: 'Tiyatro kulübüne katılacağım.' },
+    { q: 'What are you going to do after you finish school?', vocab: 'rest, homework, TV, play', model: 'I am going to rest and then do my homework.', tr: 'Önce dinleneceğim ve sonra ödevimi yapacağım.' },
+    { q: 'Are you going to buy anything this week?', vocab: 'book, game, clothes, food', model: 'I am going to buy a new book.', tr: 'Yeni bir kitap alacağım.' },
+    { q: 'What are you going to be when you grow up?', vocab: 'doctor, teacher, pilot, artist', model: 'I am going to be a doctor.', tr: 'Doktor olacağım.' },
+    { q: 'Are you going to visit your grandparents soon?', vocab: 'weekend, holiday, call, gift', model: 'Yes, I am going to visit them this weekend.', tr: 'Evet, bu hafta sonu onları ziyaret edeceğim.' },
+    { q: 'What are you going to cook for your family?', vocab: 'cake, pasta, soup, salad', model: 'I am going to cook pasta for my family.', tr: 'Ailem için makarna pişireceğim.' },
+    { q: 'Are you going to take any exams this month?', vocab: 'study, prepare, nervous, practice', model: 'Yes, I am going to take a maths exam.', tr: 'Evet, bir matematik sınavına gireceğim.' },
+    { q: 'What are you going to do on your next birthday?', vocab: 'party, cake, friends, celebration', model: 'I am going to have a party with my friends.', tr: 'Arkadaşlarımla parti yapacağım.' }
+  ]
+};
+
+let currentSpeakingSection = null;
+let currentSpeakingIdx = 0;
+
+function loadSpeaking(section) {
+  currentSpeakingSection = section;
+  currentSpeakingIdx = 0;
+  buildSpeakingQuestion();
+}
+
+function buildSpeakingQuestion() {
+  const data = speakingData[currentSpeakingSection];
+  if (!data || currentSpeakingIdx >= data.length) {
+    document.getElementById('speakingSection').innerHTML = `
+      <div class="card text-center">
+        <h2>🎉 Speaking Practice Complete!</h2>
+        <p>You practiced all ${data.length} questions!</p>
+        <button class="btn btn-primary mt-2" onclick="loadSpeaking('${currentSpeakingSection}')">🔄 Practice Again</button>
+      </div>
+    `;
+    return;
+  }
+  
+  const q = data[currentSpeakingIdx];
+  
+  document.getElementById('speakingSection').innerHTML = `
+    <div class="card">
+      <div class="flex justify-between items-center">
+        <h3 class="card-title">🎤 Speaking Question ${currentSpeakingIdx + 1}/${data.length}</h3>
+        <span class="tag">${currentSpeakingSection.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+      </div>
+      
+      <p style="font-size:1.3rem; font-weight:700; margin:16px 0;">${q.q}</p>
+      
+      <div class="tense-box" style="background:rgba(99,102,241,0.05); padding:12px; border-radius:var(--radius);">
+        <strong>Useful Vocabulary:</strong> ${q.vocab}
+      </div>
+      
+      <div class="tense-box" style="background:rgba(16,185,129,0.05); padding:12px; border-radius:var(--radius); margin:12px 0;">
+        <strong>Model Answer:</strong> ${q.model}
+      </div>
+      
+      <div class="tense-box" style="background:rgba(245,158,11,0.05); padding:12px; border-radius:var(--radius);">
+        <strong>🇹🇷 Türkçe Yardım:</strong> "${q.tr}"
+      </div>
+      
+      <div class="recorder" style="margin:16px 0;">
+        <h4>🎙️ Record Your Answer</h4>
+        <button class="recorder-btn" id="recordBtn" onclick="toggleRecording()">🎤</button>
+        <div class="recorder-timer" id="recorderTimer">00:00</div>
+        <div id="recordingStatus" style="margin:8px 0; color:var(--text-light);">Click to start recording</div>
+        <audio id="audioPlayback" controls style="margin:12px 0; max-width:100%;"></audio>
+      </div>
+      
+      <div class="flex gap-2">
+        <button class="btn btn-primary" onclick="currentSpeakingIdx++; buildSpeakingQuestion();">Next ➡️</button>
+        <button class="btn btn-secondary" onclick="currentSpeakingIdx = 0; buildSpeakingQuestion();">🔄 Restart</button>
+      </div>
+    </div>
+  `;
+}
+
+let mediaRecorder = null;
+let audioChunks = [];
+let recordingTimer = null;
+let recordingSeconds = 0;
+
+async function toggleRecording() {
+  const btn = document.getElementById('recordBtn');
+  const status = document.getElementById('recordingStatus');
+  
+  if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+      
+      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(audioChunks, { type: 'audio/wav' });
+        const url = URL.createObjectURL(blob);
+        document.getElementById('audioPlayback').src = url;
+        
+        STATE.recordings.push({ date: new Date().toISOString(), section: currentSpeakingSection });
+        saveState();
+        addXP(20);
+        
+        stream.getTracks().forEach(t => t.stop());
+      };
+      
+      mediaRecorder.start();
+      btn.classList.add('recording');
+      status.textContent = 'Recording... Click to stop';
+      recordingSeconds = 0;
+      recordingTimer = setInterval(() => {
+        recordingSeconds++;
+        const mins = Math.floor(recordingSeconds / 60).toString().padStart(2, '0');
+        const secs = (recordingSeconds % 60).toString().padStart(2, '0');
+        document.getElementById('recorderTimer').textContent = `${mins}:${secs}`;
+      }, 1000);
+    } catch(e) {
+      alert('Microphone access denied. Please allow microphone access.');
+    }
+  } else {
+    mediaRecorder.stop();
+    btn.classList.remove('recording');
+    status.textContent = 'Recording saved! Listen to your answer.';
+    clearInterval(recordingTimer);
+  }
+}
+
+// ==================== PRONUNCIATION LAB ====================
+const pronSentences = {
+  beginner: [
+    'I am a student.',
+    'She likes coffee.',
+    'He plays football.',
+    'We go to school.',
+    'They live in Ankara.',
+    'The cat is sleeping.',
+    'I drink milk every day.',
+    'She reads a book.',
+    'He works in an office.',
+    'We are happy today.',
+    'They study English.',
+    'The sun is hot.',
+    'I wake up early.',
+    'She cooks dinner.',
+    'He watches TV.',
+    'We play games.',
+    'They eat lunch.',
+    'The dog runs fast.',
+    'I brush my teeth.',
+    'She sings well.'
+  ],
+  intermediate: [
+    'I usually wake up at seven o\'clock in the morning.',
+    'She is reading a very interesting book right now.',
+    'They traveled to Paris last summer for their holiday.',
+    'We are going to visit our grandparents this weekend.',
+    'He will help me with my homework tonight.',
+    'The children are playing in the garden at the moment.',
+    'My mother cooks delicious food every evening.',
+    'I promise I will call you when I arrive.',
+    'She bought a beautiful dress for the party.',
+    'We have been learning English for three years.',
+    'The weather is very nice today, let\'s go outside.',
+    'He is not feeling well, so he stayed home.',
+    'I think it will rain tomorrow afternoon.',
+    'They are going to move to a new house soon.',
+    'My best friend lives in a different city now.',
+    'We watched an amazing film at the cinema.',
+    'She always helps other people when she can.',
+    'The students are preparing for their exams.',
+    'I have never been to a foreign country before.',
+    'He speaks three languages fluently.'
+  ],
+  advanced: [
+    'Although it was raining heavily, they decided to go for a walk in the park.',
+    'If I had known about the exam, I would have studied much harder.',
+    'The teacher explained the grammar rules so clearly that everyone understood.',
+    'She has been working at the hospital for over ten years and loves her job.',
+    'By the time we arrived at the cinema, the film had already started.',
+    'Not only did he pass the exam, but he also got the highest score in the class.',
+    'The government announced new plans to improve education in rural areas.',
+    'I would rather stay at home and read a book than go to the party.',
+    'The scientist discovered a new species of bird in the Amazon rainforest.',
+    'Despite the difficulties, they managed to finish the project on time.',
+    'Had I known the truth earlier, I would have acted differently.',
+    'The novel was so compelling that I couldn\'t put it down until I finished it.',
+    'Environmental problems require immediate action from every country.',
+    'She succeeded in winning the competition after years of practice.',
+    'The historical building was carefully restored by a team of experts.',
+    'Unless you practice regularly, you won\'t improve your pronunciation.',
+    'The conference brought together researchers from all over the world.',
+    'It is essential that we protect our natural resources for future generations.',
+    'The documentary provided fascinating insights into the lives of wild animals.',
+    'Advanced technology has transformed the way we communicate with each other.'
+  ]
+};
+
+let currentPronLevel = 'beginner';
+let pronIdx = 0;
+let pronScores = { beginner: 0, intermediate: 0, advanced: 0 };
+
+function loadPronunciation(level) {
+  currentPronLevel = level;
+  pronIdx = 0;
+  buildPronunciationSentence();
+  updatePronLeaderboard();
+}
+
+function buildPronunciationSentence() {
+  const sentences = pronSentences[currentPronLevel];
+  if (pronIdx >= sentences.length) {
+    document.getElementById('pronunciationSection').innerHTML = `
+      <div class="card text-center">
+        <h2>🎉 Pronunciation Complete!</h2>
+        <p>You practiced all ${sentences.length} sentences at ${currentPronLevel} level!</p>
+        <button class="btn btn-primary mt-2" onclick="loadPronunciation('${currentPronLevel}')">🔄 Practice Again</button>
+      </div>
+    `;
+    return;
+  }
+  
+  const sentence = sentences[pronIdx];
+  
+  document.getElementById('pronunciationSection').innerHTML = `
+    <div class="card">
+      <div class="flex justify-between items-center">
+        <h3 class="card-title">🗣️ ${currentPronLevel.charAt(0).toUpperCase() + currentPronLevel.slice(1)} Level</h3>
+        <span class="tag">${pronIdx + 1}/${sentences.length}</span>
+      </div>
+      
+      <p style="font-size:1.3rem; font-weight:700; margin:20px 0; text-align:center; padding:16px; background:var(--bg); border-radius:var(--radius);">"${sentence}"</p>
+      
+      <div class="text-center">
+        <button class="btn btn-primary btn-lg" onclick="startPronunciation('${sentence}')">🎤 Speak Now</button>
+      </div>
+      
+      <div id="pronResult" style="margin:16px 0;"></div>
+      
+      <div class="flex gap-2 justify-center">
+        <button class="btn btn-secondary" onclick="pronIdx > 0 ? (pronIdx--, buildPronunciationSentence()) : null;">⬅️ Previous</button>
+        <button class="btn btn-primary" onclick="pronIdx++; buildPronunciationSentence();">Next ➡️</button>
+      </div>
+    </div>
+  `;
+}
+
+function startPronunciation(target) {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    document.getElementById('pronResult').innerHTML = '<div class="feedback error">❌ Speech recognition is not supported in this browser. Please use Chrome.</div>';
+    return;
+  }
+  
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 5;
+  
+  document.getElementById('pronResult').innerHTML = '<div class="feedback info">🎤 Listening... Please speak clearly.</div>';
+  
+  recognition.start();
+  
+  recognition.onresult = (event) => {
+    const spoken = event.results[0][0].transcript;
+    const accuracy = calculateAccuracy(target.toLowerCase(), spoken.toLowerCase());
+    
+    let accuracyClass = accuracy >= 80 ? 'accuracy-high' : accuracy >= 50 ? 'accuracy-medium' : 'accuracy-low';
+    let emoji = accuracy >= 80 ? '🌟' : accuracy >= 50 ? '👍' : '💪';
+    
+    document.getElementById('pronResult').innerHTML = `
+      <div class="card">
+        <h4>${emoji} Accuracy: ${accuracy}%</h4>
+        <div class="accuracy-meter"><div class="accuracy-fill ${accuracyClass}" style="width:${accuracy}%"></div></div>
+        <p><strong>You said:</strong> "${spoken}"</p>
+        <p><strong>Target:</strong> "${target}"</p>
+        <p style="color:var(--text-light); margin-top:8px;">${accuracy >= 80 ? 'Excellent pronunciation!' : accuracy >= 50 ? 'Good try! Practice more!' : 'Keep practicing! You\'ll get better!'}</p>
+      </div>
+    `;
+    
+    STATE.pronProgress[currentPronLevel + '-' + pronIdx] = true;
+    saveState();
+    addXP(Math.round(accuracy / 5));
+  };
+  
+  recognition.onerror = () => {
+    document.getElementById('pronResult').innerHTML = '<div class="feedback error">❌ Could not hear you. Please try again.</div>';
+  };
+}
+
+function calculateAccuracy(target, spoken) {
+  const targetWords = target.replace(/[^\w\s]/g, '').split(/\s+/);
+  const spokenWords = spoken.replace(/[^\w\s]/g, '').split(/\s+/);
+  
+  let matches = 0;
+  spokenWords.forEach(w => {
+    if (targetWords.includes(w)) matches++;
+  });
+  
+  return Math.round((matches / Math.max(targetWords.length, spokenWords.length)) * 100);
+}
+
+function updatePronLeaderboard() {
+  const leaderboard = [
+    { name: 'You', score: Object.keys(STATE.pronProgress).length },
+    { name: 'Ahmet', score: 35 },
+    { name: 'Elif', score: 42 },
+    { name: 'Can', score: 28 },
+    { name: 'Zeynep', score: 38 }
+  ].sort((a, b) => b.score - a.score);
+  
+  document.getElementById('pronLeaderboard').innerHTML = leaderboard.map((l, i) => `
+    <div class="leaderboard-item">
+      <div class="leaderboard-rank">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</div>
+      <div class="leaderboard-name">${l.name}</div>
+      <div class="leaderboard-score">${l.score} sentences</div>
+    </div>
+  `).join('');
+}
+
+// ==================== ACHIEVEMENTS ====================
+const achievementDefs = [
+  { id: 'grammar-master', name: 'Grammar Master', icon: '📚', desc: 'Complete all 5 grammar sections', condition: () => Object.keys(STATE.grammarProgress).length >= 5 },
+  { id: 'sentence-builder', name: 'Sentence Builder', icon: '✍️', desc: 'Complete 90+ sentence exercises', condition: () => STATE.xp >= 500 },
+  { id: 'reading-hero', name: 'Reading Hero', icon: '📖', desc: 'Complete all reading passages', condition: () => Object.keys(STATE.readingProgress).length >= 15 },
+  { id: 'vocab-ninja', name: 'Vocabulary Ninja', icon: '🧠', desc: 'Learn 50 vocabulary words', condition: () => Object.keys(STATE.vocabProgress).length >= 50 },
+  { id: 'speaking-champion', name: 'Speaking Champion', icon: '🎤', desc: 'Complete all speaking questions', condition: () => Object.keys(STATE.speakingProgress).length >= 75 },
+  { id: 'pronunciation-expert', name: 'Pronunciation Expert', icon: '🗣️', desc: 'Complete 50 pronunciation exercises', condition: () => Object.keys(STATE.pronProgress).length >= 50 },
+  { id: 'consistency-king', name: 'Consistency King', icon: '👑', desc: 'Maintain a 7-day streak', condition: () => STATE.streak >= 7 },
+  { id: 'seven-day-streak', name: '7-Day Streak', icon: '🔥', desc: 'Practice for 7 days in a row', condition: () => STATE.streak >= 7 },
+  { id: 'thirty-day-streak', name: '30-Day Streak', icon: '🔥', desc: 'Practice for 30 days in a row', condition: () => STATE.streak >= 30 },
+  { id: 'xp-club', name: '1000 XP Club', icon: '⭐', desc: 'Earn 1000 XP points', condition: () => STATE.xp >= 1000 },
+  { id: 'perfect-score', name: 'Perfect Score Legend', icon: '🏆', desc: 'Get 100% on any quiz', condition: () => STATE.xp >= 2000 },
+  { id: 'placement-taker', name: 'Placement Taker', icon: '📝', desc: 'Complete the placement test', condition: () => STATE.placementScore > 0 }
+];
+
+function checkAchievements() {
+  achievementDefs.forEach(a => {
+    if (!STATE.achievements.includes(a.id) && a.condition()) {
+      STATE.achievements.push(a.id);
+      addXP(50);
+      setTimeout(() => showAchievementPopup(a), 1000);
+    }
+  });
+}
+
+function showAchievementPopup(achievement) {
+  document.getElementById('modalContent').innerHTML = `
+    <div class="text-center">
+      <div style="font-size:5rem;">${achievement.icon}</div>
+      <h2 style="margin:16px 0;">🎉 Achievement Unlocked!</h2>
+      <h3>${achievement.name}</h3>
+      <p style="color:var(--text-light); margin:8px 0;">${achievement.desc}</p>
+      <p style="color:var(--secondary); font-weight:700; font-size:1.2rem;">+50 XP Reward!</p>
+      <button class="btn btn-primary mt-2" onclick="closeModal()">Awesome!</button>
+    </div>
+  `;
+  document.getElementById('modalOverlay').classList.add('active');
+  showConfetti();
+}
+
+function buildAchievements() {
+  document.getElementById('achievementsGrid').innerHTML = achievementDefs.map(a => {
+    const unlocked = STATE.achievements.includes(a.id);
+    return `
+      <div class="achievement ${unlocked ? '' : 'locked'}">
+        <div class="achievement-icon">${a.icon}</div>
+        <div class="achievement-info">
+          <h4>${a.name}</h4>
+          <p>${a.desc}</p>
+          ${unlocked ? '<span class="tag green">Unlocked ✅</span>' : '<span class="tag">Locked 🔒</span>'}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ==================== CERTIFICATE ====================
+function generateCertificate() {
+  const grammarDone = Object.keys(STATE.grammarProgress).length;
+  const readingDone = Object.keys(STATE.readingProgress).length;
+  const vocabDone = Object.keys(STATE.vocabProgress).length;
+  const overall = Math.round(((grammarDone / 5) + (readingDone / 6) + Math.min(vocabDone / 50, 1)) / 3 * 100);
+  
+  document.getElementById('certificateArea').style.display = 'block';
+  document.getElementById('certificateArea').innerHTML = `
+    <div class="certificate" id="certPrint">
+      <div class="seal">🎓</div>
+      <h1>Certificate of Completion</h1>
+      <p style="font-size:1.1rem;">This is to certify that</p>
+      <h2>${STATE.studentName}</h2>
+      <p>has successfully completed the English Grammar Adventure platform</p>
+      <p>with an overall completion rate of <strong style="color:var(--primary); font-size:1.5rem;">${overall}%</strong></p>
+      
+      <div style="margin:24px 0; text-align:left; max-width:400px; margin-left:auto; margin-right:auto;">
+        <p>📚 Grammar: ${grammarDone}/5 sections completed</p>
+        <p>📖 Reading: ${readingDone}/6 passages completed</p>
+        <p>🧠 Vocabulary: ${vocabDone}/50 words learned</p>
+        <p>⭐ Total XP: ${STATE.xp}</p>
+        <p>🏆 Achievements: ${STATE.achievements.length}/${achievementDefs.length}</p>
+        <p>🔥 Current Streak: ${STATE.streak} days</p>
+      </div>
+      
+      <p>Date: ${new Date().toLocaleDateString()}</p>
+      <p style="margin-top:8px;">English Grammar Adventure - A1-A2 Learning Platform</p>
+      
+      <div class="flex gap-2 justify-center mt-2">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
+        <button class="btn btn-success" onclick="downloadCertificate()">📥 Download as PDF</button>
+      </div>
+    </div>
+  `;
+  
+  addXP(100);
+  showConfetti();
+}
+
+function downloadCertificate() {
+  window.print();
+}
+
+// ==================== TEACHER MODE ====================
+function loginTeacher() {
+  const pwd = document.getElementById('teacherPassword').value;
+  if (pwd === 'teacher123') {
+    document.getElementById('teacherLogin').style.display = 'none';
+    document.getElementById('teacherPanel').style.display = 'block';
+    buildTeacherPanel();
+  } else {
+    alert('❌ Incorrect password!');
+  }
+}
+
+function buildTeacherPanel() {
+  const panel = document.getElementById('teacherPanel');
+  panel.innerHTML = `
+    <div class="teacher-panel">
+      <h3 class="card-title">📊 Student Analytics Dashboard</h3>
+      
+      <div class="grid grid-3 mb-2">
+        <div class="stat-card">
+          <div class="stat-value">${STATE.studentName}</div>
+          <div class="stat-label">Student</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${STATE.xp}</div>
+          <div class="stat-label">Total XP</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${STATE.level}</div>
+          <div class="stat-label">Level</div>
+        </div>
+      </div>
+
+      <h4 style="margin:16px 0;">📈 Progress Report</h4>
+      <div class="grid grid-2">
+        <div>
+          <p><strong>Grammar Progress:</strong> ${Object.keys(STATE.grammarProgress).length}/5 tenses</p>
+          <div class="progress-container"><div class="progress-bar" style="width:${(Object.keys(STATE.grammarProgress).length/5)*100}%"></div></div>
+        </div>
+        <div>
+          <p><strong>Reading Progress:</strong> ${Object.keys(STATE.readingProgress).length}/18 questions</p>
+          <div class="progress-container"><div class="progress-bar green" style="width:${(Object.keys(STATE.readingProgress).length/18)*100}%"></div></div>
+        </div>
+        <div>
+          <p><strong>Vocabulary Progress:</strong> ${Object.keys(STATE.vocabProgress).length}/50 words</p>
+          <div class="progress-container"><div class="progress-bar orange" style="width:${Math.min(100,(Object.keys(STATE.vocabProgress).length/50)*100)}%"></div></div>
+        </div>
+        <div>
+          <p><strong>Speaking Progress:</strong> ${Object.keys(STATE.speakingProgress).length}/75 questions</p>
+          <div class="progress-container"><div class="progress-bar red" style="width:${(Object.keys(STATE.speakingProgress).length/75)*100}%"></div></div>
+        </div>
+      </div>
+
+      <h4 style="margin:16px 0;">📝 Answer Key</h4>
+      <div class="accordion" onclick="this.classList.toggle('open')">
+        <div class="accordion-header">Placement Test Answers <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-content">
+          ${placementQuestions.map((q, i) => `
+            <div class="answer-reveal">
+              <strong>${i+1}.</strong> ${q.q}<br>
+              ✅ Answer: ${q.options[q.correct]}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="accordion" onclick="this.classList.toggle('open')">
+        <div class="accordion-header">Grammar Quiz Answers <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-content">
+          ${Object.entries(grammarData).map(([key, data]) => `
+            <h4 style="margin:12px 0 8px;">${data.title}</h4>
+            ${data.quiz.map((q, i) => `
+              <div class="answer-reveal">
+                <strong>${i+1}.</strong> ${q.q}<br>
+                ✅ Answer: ${q.options[q.correct]}
+              </div>
+            `).join('')}
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="flex gap-2 mt-2 flex-wrap">
+        <button class="btn btn-warning" onclick="if(confirm('Reset all scores?')){localStorage.clear();location.reload();}">🔄 Reset All Scores</button>
+        <button class="btn btn-secondary" onclick="exportData()">📤 Export Student Data</button>
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Worksheet</button>
+      </div>
+    </div>
+  `;
+}
+
+function exportData() {
+  const data = {
+    student: STATE.studentName,
+    level: STATE.level,
+    xp: STATE.xp,
+    streak: STATE.streak,
+    grammar: STATE.grammarProgress,
+    reading: STATE.readingProgress,
+    vocabulary: STATE.vocabProgress,
+    speaking: STATE.speakingProgress,
+    pronunciation: STATE.pronProgress,
+    achievements: STATE.achievements,
+    placementScore: STATE.placementScore,
+    lastActive: STATE.lastActive
+  };
+  
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `student-progress-${STATE.studentName.toLowerCase().replace(/\s/g, '-')}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ==================== UTILITIES ====================
+function showConfetti() {
+  const container = document.getElementById('confettiContainer');
+  const colors = ['#6366f1', '#f59e0b', '#10b981', '#ef4444', '#3b82f6', '#8b5cf6'];
+  
+  for (let i = 0; i < 50; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDelay = Math.random() * 2 + 's';
+    piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+    container.appendChild(piece);
+  }
+  
+  setTimeout(() => { container.innerHTML = ''; }, 4000);
+}
+
+function closeModal(event) {
+  if (event && event.target !== document.getElementById('modalOverlay')) return;
+  document.getElementById('modalOverlay').classList.remove('active');
+}
+
+// ==================== INITIALIZATION ====================
+function init() {
+  loadState();
+  
+  // Apply settings
+  if (STATE.settings.theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  if (STATE.settings.fontSize !== 'normal') document.documentElement.setAttribute('data-fontsize', STATE.settings.fontSize);
+  
+  updateDashboard();
+  
+  // Check achievements on load
+  checkAchievements();
+  
+  // Log weekly activity
+  const dayIdx = new Date().getDay();
+  STATE.weeklyActivity[dayIdx === 0 ? 6 : dayIdx - 1]++;
+  saveState();
+}
+
+init();
+</script>
+</body>
+</html>
